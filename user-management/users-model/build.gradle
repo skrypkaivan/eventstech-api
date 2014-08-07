@@ -1,0 +1,9 @@
+apply plugin: 'idea'
+
+idea {
+    module {
+        name = 'user-management-model'
+    }
+}
+
+jar.archiveName = 'user-management-model-' + project.version + '.jar'

@@ -1,0 +1,32 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+
+jar.archiveName = 'data-source-' + project.version + '.jar'
+
+idea {
+    module {
+        name = 'common-data-source'
+    }
+}
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-context'
+    compile group: 'org.springframework', name: 'spring-jdbc'
+    compile group: 'org.springframework', name: 'spring-tx'
+    compile group: 'org.springframework', name: 'spring-orm'
+    compile group: 'org.springframework.data', name: 'spring-data-commons'
+    compile group: 'org.springframework.data', name: 'spring-data-jpa'
+}
+
+configurations {
+    tests
+}
+
+task testJar(type: Jar) {
+    appendix = 'tests'
+    from sourceSets.test.output
+}
+
+artifacts {
+    tests testJar
+}

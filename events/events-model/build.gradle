@@ -1,0 +1,14 @@
+apply plugin: 'idea'
+
+
+idea {
+    module {
+        name = 'events-model'
+    }
+}
+
+dependencies {
+    compile project (path: ':common:common-model')
+}
+
+jar.archiveName = 'events-model-' + project.version + '.jar'

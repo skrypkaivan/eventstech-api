@@ -1,0 +1,13 @@
+apply plugin: 'idea'
+
+dependencies {
+    compile project(':common:data-source')
+}
+
+idea {
+    module {
+        name = 'user-management-rest-api'
+    }
+}
+
+jar.archiveName = "user-management-rest-api-" + project.version + ".jar"

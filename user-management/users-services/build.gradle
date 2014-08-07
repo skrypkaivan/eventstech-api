@@ -1,0 +1,13 @@
+apply plugin: 'idea'
+
+dependencies {
+    compile project(':common:data-source')
+}
+
+idea {
+    module {
+        name = 'user-management-services'
+    }
+}
+
+jar.archiveName = "user-management-services-" + project.version + ".jar"

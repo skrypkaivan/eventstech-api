@@ -1,0 +1,13 @@
+apply plugin: 'idea'
+
+idea {
+    module {
+        name = 'common-rest-api'
+    }
+}
+
+dependencies {
+    compile project (path: ':common:common-model')
+}
+
+jar.archiveName = 'common-rest-api-' + project.version + '.jar'

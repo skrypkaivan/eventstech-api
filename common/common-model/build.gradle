@@ -1,0 +1,9 @@
+apply plugin: 'idea'
+
+idea {
+    module {
+        name = 'common-model'
+    }
+}
+
+jar.archiveName = 'common-model-' + project.version + '.jar'

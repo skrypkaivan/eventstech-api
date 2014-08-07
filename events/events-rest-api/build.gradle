@@ -1,0 +1,16 @@
+apply plugin: 'idea'
+
+dependencies {
+	compile project(':common:data-source')
+    compile project(':events:events-model')
+    compile project(':events:events-services')
+    testCompile project(path:':common:data-source', configuration: 'tests')
+}
+
+idea {
+    module {
+        name = 'events-rest-api'
+    }
+}
+
+jar.archiveName = "events-rest-api-" + project.version + ".jar"

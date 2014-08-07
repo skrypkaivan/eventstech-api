@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dozer" class="org.dozer.DozerBeanMapper">
+        <constructor-arg>
+            <list>
+                <value>dozer/dozer-events-module-mappings.xml</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="eventCategoryService" class="com.itut.service.impl.EventCategoryServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="eventCategoryRepository" ref="eventCategoryRepository"/>
+    </bean>
+
+    <bean id="speakerService" class="com.itut.service.impl.SpeakerServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="speakerRepository" ref="speakerRepository"/>
+    </bean>
+
+    <bean id="speakerCategoryService" class="com.itut.service.impl.SpeakerCategoryServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="speakerCategoryRepository" ref="speakerCategoryRepository"/>
+    </bean>
+
+    <bean id="eventService" class="com.itut.service.impl.EventServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="eventRepository" ref="eventRepository"/>
+    </bean>
+</beans>

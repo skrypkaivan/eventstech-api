@@ -1,0 +1,13 @@
+apply plugin: 'war'
+
+dependencies {
+    compile project(":events:events-services")
+    compile project(":common:data-source")
+    compile project(":events:events-model")
+    compile project(":events:events-rest-api")
+    compile project(":common:common-rest-api")
+    compile project(":events:events-services")
+    compile project(":user-management:users-model")
+    compile project(":user-management:users-services")
+    compile project(":user-management:users-rest-api")
+}
