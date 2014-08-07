@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/security
+                                 http://www.springframework.org/schema/security/spring-security.xsd">
 
-</beans>
+    <beans:bean id="authEntryPoint" class="com.itut.security.RestAuthenticationEntryPoint"/>
+
+    <http pattern="/**" entry-point-ref="authEntryPoint" use-expressions="true" auto-config="true">
+
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="pwd" authorities="ROLE_ADMIN, ROLE_CONFIGURATOR"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+    <global-method-security pre-post-annotations="enabled" proxy-target-class="true"/>
+</beans:beans>

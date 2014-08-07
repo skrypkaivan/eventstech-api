@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +33,13 @@ public class SpeakerController {
     @Autowired
     private EventService eventService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<SpeakerDto> createNewSpeaker(@Validated @RequestBody SpeakerDto speakerDto) {
         return new ResponseEntity<>(speakerService.save(speakerDto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<SpeakerDto> updateSpeaker(@Validated @RequestBody SpeakerDto speakerDto) {
         return new ResponseEntity<>(speakerService.save(speakerDto), HttpStatus.OK);
@@ -48,6 +51,7 @@ public class SpeakerController {
         return new ResponseEntity<>(speakerService.getPage(pageNumber, pageSize), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.DELETE, value = "/{speakerId}")
     public ResponseEntity deleteSpeaker(@PathVariable Long speakerId) {
         speakerService.delete(speakerId);
