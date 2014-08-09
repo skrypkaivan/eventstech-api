@@ -78,13 +78,19 @@ public class Event {
     private boolean popular;
 
     @Column(name = "short_desc", nullable = false)
-    private String shortDesription;
+    private String shortDescription;
 
     @Column(name = "long_desc", nullable = false)
     private String longDescription;
 
     @Column(name = "slug", nullable = false)
     private String slug;
+
+    @Column(name = "pre_moderate")
+    private boolean preModerate;
+
+    @ManyToOne(optional = false)
+    private User creator;
 
     public Long getId() {
         return id;
@@ -174,12 +180,12 @@ public class Event {
         this.popular = popular;
     }
 
-    public String getShortDesription() {
-        return shortDesription;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setShortDesription(String shortDesription) {
-        this.shortDesription = shortDesription;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 
     public String getLongDescription() {
@@ -188,5 +194,29 @@ public class Event {
 
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
+    }
+
+    public boolean isPreModerate() {
+        return preModerate;
+    }
+
+    public void setPreModerate(boolean preModerate) {
+        this.preModerate = preModerate;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }

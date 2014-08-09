@@ -8,7 +8,8 @@ idea {
 }
 
 dependencies {
-    compile project (path: ':common:common-model')
+    compile project (':common:common-model')
+    compile project (':user-management:users-model')
 }
 
 jar.archiveName = 'events-model-' + project.version + '.jar'

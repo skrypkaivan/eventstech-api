@@ -6,6 +6,7 @@ import com.itut.rest.dto.SpeakerCategoryDto;
 import com.itut.service.SpeakerCategoryService;
 import com.itut.test.db.AbstractDbTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,6 +22,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
  * Created by vanish on 8/7/14.
  */
 @ContextConfiguration(locations = {"classpath*:spring/spring-events-services-test-context.xml"})
+@Ignore
 public class SpeakerCategoryServiceImplTest extends AbstractDbTest {
 
     @Autowired

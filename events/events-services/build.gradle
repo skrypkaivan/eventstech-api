@@ -3,14 +3,9 @@ apply plugin: 'idea'
 dependencies {
     compile project(':common:data-source')
     compile project(':events:events-model')
+    compile project(':user-management:users-model')
+    compile project(':common:common-services')
     testCompile project(path:':common:data-source', configuration: 'tests')
-
-    compile group: 'org.springframework', name: 'spring-context'
-    compile group: 'org.springframework', name: 'spring-jdbc'
-    compile group: 'org.springframework', name: 'spring-tx'
-    compile group: 'org.springframework', name: 'spring-orm'
-    compile group: 'org.springframework.data', name: 'spring-data-commons'
-    compile group: 'org.springframework.data', name: 'spring-data-jpa'
 }
 
 idea {

@@ -2,6 +2,7 @@ package com.itut.rest;
 
 import com.itut.rest.dto.EventDto;
 import com.itut.rest.dto.SpeakerDto;
+import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.service.EventService;
 import com.itut.service.SpeakerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by vanish on 8/6/14.
  */
 @RestController
-@RequestMapping(value = "/speakers",
+@RequestMapping(value = "/speaker",
         produces = MediaType.APPLICATION_JSON_VALUE,
         consumes = MediaType.APPLICATION_JSON_VALUE
 )
@@ -33,15 +34,15 @@ public class SpeakerController {
     @Autowired
     private EventService eventService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<SpeakerDto> createNewSpeaker(@Validated @RequestBody SpeakerDto speakerDto) {
         return new ResponseEntity<>(speakerService.save(speakerDto), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<SpeakerDto> updateSpeaker(@Validated @RequestBody SpeakerDto speakerDto) {
+    public ResponseEntity<SpeakerDto> updateSpeaker(@Validated(ModelExistsValidationGroup.class) @RequestBody SpeakerDto speakerDto) {
         return new ResponseEntity<>(speakerService.save(speakerDto), HttpStatus.OK);
     }
 
@@ -51,7 +52,7 @@ public class SpeakerController {
         return new ResponseEntity<>(speakerService.getPage(pageNumber, pageSize), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.DELETE, value = "/{speakerId}")
     public ResponseEntity deleteSpeaker(@PathVariable Long speakerId) {
         speakerService.delete(speakerId);
@@ -76,7 +77,7 @@ public class SpeakerController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/tags/{tag}")
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/tag/{tag}")
     public ResponseEntity<List<SpeakerDto>> getByCategory(@PathVariable String tag,
                                                           @RequestParam(value = "page_num", defaultValue = DEFAULT_PAGE) int pageNumber,
                                                           @RequestParam(value = "page_size", defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {

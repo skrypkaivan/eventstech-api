@@ -3,8 +3,10 @@ package com.itut.service.impl;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.itut.db.entity.Event;
+import com.itut.db.entity.User;
 import com.itut.db.repositories.EventRepository;
 import com.itut.rest.dto.EventDto;
+import com.itut.rest.dto.UserDto;
 import com.itut.service.EventService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.data.domain.PageRequest;
@@ -24,8 +26,19 @@ public class EventServiceImpl implements EventService {
     private DozerBeanMapper dozer;
 
     @Override
-    public EventDto save(EventDto eventDto) {
+    public EventDto save(EventDto eventDto, UserDto userDto) {
         Event event = dozer.map(eventDto, Event.class);
+        User user = dozer.map(userDto, User.class);
+        event.setCreator(user);
+        return dozer.map(eventRepository.save(event), EventDto.class);
+    }
+
+    @Transactional
+    @Override
+    public EventDto update(EventDto eventDto) {
+        Event event = dozer.map(eventDto, Event.class);
+        Event eventOldState = eventRepository.getOne(eventDto.get_id());
+        event.setCreator(eventOldState.getCreator());
         return dozer.map(eventRepository.save(event), EventDto.class);
     }
 
@@ -60,6 +73,23 @@ public class EventServiceImpl implements EventService {
     public EventDto getBySlug(String slug) {
         Event event = eventRepository.getBySlug(slug);
         return event == null ? null : dozer.map(event, EventDto.class);
+    }
+
+    @Transactional
+    @Override
+    public UserDto getEventCreator(Long eventId) {
+        Event event = eventRepository.getOne(eventId);
+        return dozer.map(event.getCreator(), UserDto.class);
+    }
+
+    @Override
+    public void delete(Long id) {
+        eventRepository.delete(id);
+    }
+
+    @Override
+    public boolean exists(Long eventId) {
+        return eventRepository.exists(eventId);
     }
 
     private List<EventDto> transform(List<Event> events) {

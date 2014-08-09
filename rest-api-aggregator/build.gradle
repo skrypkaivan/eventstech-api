@@ -10,4 +10,5 @@ dependencies {
     compile project(":user-management:users-model")
     compile project(":user-management:users-services")
     compile project(":user-management:users-rest-api")
+    compile project(":user-management:security")
 }

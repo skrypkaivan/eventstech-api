@@ -3,13 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="dozer" class="org.dozer.DozerBeanMapper">
-        <constructor-arg>
-            <list>
-                <value>dozer/dozer-events-module-mappings.xml</value>
-            </list>
-        </constructor-arg>
-    </bean>
+    <import resource="classpath*:spring/spring-common-services-context.xml"/>
 
     <bean id="eventCategoryService" class="com.itut.service.impl.EventCategoryServiceImpl">
         <property name="dozer" ref="dozer"/>

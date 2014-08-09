@@ -22,7 +22,7 @@ import java.util.List;
  * Created by vanish on 8/6/14.
  */
 @RestController
-@RequestMapping(value = "/speakers/categories",
+@RequestMapping(value = "/speakers_tag",
         produces = MediaType.APPLICATION_JSON_VALUE,
         consumes = MediaType.APPLICATION_JSON_VALUE
 )
@@ -31,16 +31,16 @@ public class SpeakerCategoryController {
     @Autowired
     private SpeakerCategoryService speakerCategoryService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<SpeakerCategoryDto> createNewCategory(@Validated @RequestBody SpeakerCategoryDto speakerCategoryDto) {
         return new ResponseEntity<>(speakerCategoryService.save(speakerCategoryDto), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<SpeakerCategoryDto> modifySpeakerCategory(
-            @Validated({ModelExistsValidationGroup.class}) @RequestBody SpeakerCategoryDto speakerCategoryDto) {
+            @Validated(ModelExistsValidationGroup.class) @RequestBody SpeakerCategoryDto speakerCategoryDto) {
         return new ResponseEntity<>(speakerCategoryService.save(speakerCategoryDto), HttpStatus.OK);
     }
 

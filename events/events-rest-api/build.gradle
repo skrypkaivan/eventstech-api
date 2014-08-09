@@ -4,6 +4,8 @@ dependencies {
 	compile project(':common:data-source')
     compile project(':events:events-model')
     compile project(':events:events-services')
+    compile project(':user-management:users-model')
+    compile project(':user-management:security')
     testCompile project(path:':common:data-source', configuration: 'tests')
 }
 

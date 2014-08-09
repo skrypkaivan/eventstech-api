@@ -11,6 +11,7 @@ import com.itut.service.SpeakerService;
 import com.itut.test.db.AbstractDbTest;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,6 +26,7 @@ import static org.hamcrest.core.IsNull.nullValue;
  * Created by vanish on 8/7/14.
  */
 @ContextConfiguration(locations = {"classpath*:spring/spring-events-services-test-context.xml"})
+@Ignore
 public class SpeakerServiceImplTest extends AbstractDbTest {
 
     @Autowired

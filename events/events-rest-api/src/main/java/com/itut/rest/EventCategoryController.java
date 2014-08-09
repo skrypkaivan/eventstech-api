@@ -1,7 +1,6 @@
 package com.itut.rest;
 
 import com.itut.rest.dto.EventCategoryDto;
-import com.itut.rest.dto.ValidationErrorDto;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.service.EventCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +8,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import com.itut.security.UserAuthentication;
 
-import javax.validation.Valid;
-import javax.xml.ws.Response;
 import java.util.List;
 
 /**
  * Created by vanish on 8/6/14.
  */
 @RestController
-@RequestMapping(value = "/events/tag",
+@RequestMapping(value = "/events_tag",
         produces = MediaType.APPLICATION_JSON_VALUE,
         consumes = MediaType.APPLICATION_JSON_VALUE
 )
@@ -32,16 +28,16 @@ public class EventCategoryController {
     @Autowired
     private EventCategoryService eventCategoryService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<EventCategoryDto> createNewCategory(@Validated @RequestBody EventCategoryDto eventCategoryDto) {
+    public ResponseEntity<EventCategoryDto> createNewCategory(@Validated @RequestBody EventCategoryDto eventCategoryDto, @AuthenticationPrincipal UserAuthentication user) {
         return new ResponseEntity<>(eventCategoryService.save(eventCategoryDto), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<EventCategoryDto> modifyEventCategory(
-            @Validated({ModelExistsValidationGroup.class}) @RequestBody EventCategoryDto eventCategoryDto) {
+            @Validated(ModelExistsValidationGroup.class) @RequestBody EventCategoryDto eventCategoryDto) {
         return new ResponseEntity<>(eventCategoryService.save(eventCategoryDto), HttpStatus.OK);
     }
 

@@ -1,0 +1,15 @@
+apply plugin: 'idea'
+
+
+idea {
+    module {
+        name = 'user-management-security'
+    }
+}
+
+dependencies {
+    compile project(':user-management:users-model')
+    compile project(':user-management:users-services')
+}
+
+jar.archiveName = 'user-management-security-' + project.version + '.jar'

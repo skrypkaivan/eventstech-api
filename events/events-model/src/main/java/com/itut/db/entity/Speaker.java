@@ -49,6 +49,9 @@ public class Speaker {
     )
     private Set<SpeakerCategory> categories;
 
+    @OneToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -111,5 +114,13 @@ public class Speaker {
 
     public void setPopular(boolean popular) {
         this.popular = popular;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

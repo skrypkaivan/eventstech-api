@@ -2,6 +2,8 @@ apply plugin: 'idea'
 
 dependencies {
     compile project(':common:data-source')
+    compile project(':user-management:users-model')
+    compile project(':common:common-services')
 }
 
 idea {
