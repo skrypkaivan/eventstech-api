@@ -50,7 +50,7 @@ public class SpeakerCategoryController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{categoryId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{categoryId}", consumes = MediaType.ALL_VALUE)
     public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
         speakerCategoryService.delete(categoryId);
         return new ResponseEntity<>(HttpStatus.OK);
