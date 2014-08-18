@@ -5,12 +5,27 @@
 
     <import resource="classpath*:spring/spring-user-managements-services-context.xml"/>
 
-    <bean id="userAuthenticationProvider" class="com.itut.security.UserAuthenticationProvider">
+    <bean id="userAuthenticationProvider" class="com.itut.security.LoginPasswordAuthenticationProvider">
         <property name="userPrincipalService" ref="userPrincipalService"/>
         <property name="passwordEncoder" ref="passwordEncoder"/>
+        <property name="tokenService" ref="tokenService"/>
+    </bean>
+
+    <bean id="tokenAuthenticationProvider" class="com.itut.security.PreAuthenticatedTokenAuthenticationProvider">
+        <property name="tokenService" ref="tokenService"/>
+        <property name="userPrincipalService" ref="userPrincipalService"/>
     </bean>
 
     <bean id="userAuthenticationService" class="com.itut.security.service.UserAuthenticationServiceImpl"/>
+
+    <bean id="tokenService" class="org.springframework.security.core.token.KeyBasedPersistenceTokenService">
+        <property name="secureRandom">
+            <bean class="java.security.SecureRandom"/>
+        </property>
+        <property name="serverInteger" value="1312"/>
+        <property name="serverSecret" value="Afuckingamazingserverinteger"/>
+        <property name="pseudoRandomNumberBytes" value="8"/>
+    </bean>
 
     <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
         <constructor-arg value="256"/>

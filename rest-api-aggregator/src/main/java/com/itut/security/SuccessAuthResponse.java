@@ -7,11 +7,13 @@ import java.util.List;
  */
 public class SuccessAuthResponse {
     private String userName;
+    private String authToken;
     private List<String> userRoles;
 
-    public SuccessAuthResponse(String userName, List<String> userRoles) {
+    public SuccessAuthResponse(String userName, String authToken, List<String> userRoles) {
         this.userName = userName;
         this.userRoles = userRoles;
+        this.authToken = authToken;
     }
 
     public String getUserName() {
@@ -28,5 +30,13 @@ public class SuccessAuthResponse {
 
     public void setUserRoles(List<String> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

@@ -7,22 +7,30 @@ import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.BasePasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.token.Token;
+import org.springframework.security.core.token.TokenService;
 
 /**
  * Created by vanish on 8/8/14.
  */
-public class UserAuthenticationProvider implements AuthenticationProvider {
+public class LoginPasswordAuthenticationProvider implements AuthenticationProvider {
 
     private UserPrincipalService userPrincipalService;
     private BasePasswordEncoder passwordEncoder;
+    private TokenService tokenService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String hashedPassword = passwordEncoder.encodePassword(authentication.getCredentials().toString(), authentication.getName());
         UserPrincipal userPrincipal = userPrincipalService.findActiveByUsernameAndPassword(authentication.getName(), hashedPassword);
+
         if (userPrincipal != null) {
-            return new UserAuthentication(userPrincipal.getId(), userPrincipal.getUsername(),
-                    userPrincipal.getPassword(), userPrincipal.getAuthorities());
+            Token token = tokenService.allocateToken(userPrincipal.getPassword());
+            return new UserAuthentication(userPrincipal.getId(),
+                    userPrincipal.getUsername(),
+                    userPrincipal.getPassword(),
+                    new UserAuthenticationDetails(token.getKey()),
+                    userPrincipal.getAuthorities());
         }
         throw new AuthenticationCredentialsNotFoundException("Wrong username or password");
     }
@@ -38,5 +46,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
     public void setPasswordEncoder(BasePasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public void setTokenService(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
 }

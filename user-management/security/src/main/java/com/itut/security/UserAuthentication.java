@@ -13,9 +13,14 @@ public class UserAuthentication extends UsernamePasswordAuthenticationToken {
 
     private Long id;
 
-    public UserAuthentication(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserAuthentication(Long id,
+                              String username,
+                              String password,
+                              UserAuthenticationDetails details,
+                              Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.id = id;
+        this.setDetails(details);
     }
 
     public String getUsername() {

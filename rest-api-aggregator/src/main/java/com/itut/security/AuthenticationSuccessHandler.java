@@ -5,6 +5,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.token.TokenService;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -26,10 +27,10 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
-
+        UserAuthenticationDetails userAuthenticationDetails = (UserAuthenticationDetails) authentication.getDetails();
         SuccessAuthResponse successAuthResponse = new SuccessAuthResponse(authentication.getName(),
+                userAuthenticationDetails.getAuthToken(),
                 Lists.transform(Lists.newArrayList(authentication.getAuthorities()), new AuthoritiesToString()));
-        clearAuthenticationAttributes(request);
         objectMapper.writeValue(response.getWriter(), successAuthResponse);
     }
 

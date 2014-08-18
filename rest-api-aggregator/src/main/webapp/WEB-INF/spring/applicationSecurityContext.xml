@@ -12,7 +12,8 @@
 
     <beans:bean id="authEntryPoint" class="com.itut.security.RestAuthenticationEntryPoint"/>
 
-    <http pattern="/**" entry-point-ref="authEntryPoint" use-expressions="true" auto-config="true">
+    <http pattern="/**" entry-point-ref="authEntryPoint" use-expressions="true" auto-config="true" create-session="stateless">
+        <custom-filter ref="requestHeaderAuthenticationFilter" position="PRE_AUTH_FILTER"/>
         <form-login authentication-success-handler-ref="successHandler"
                     authentication-failure-handler-ref="failureHandler"
                     username-parameter="login"
@@ -20,6 +21,13 @@
                     login-processing-url="/app/login"/>
         <logout logout-url="/app/logout"/>
     </http>
+
+    <beans:bean id="requestHeaderAuthenticationFilter" class="org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter">
+        <beans:property name="principalRequestHeader" value="X-Auth-Login"/>
+        <beans:property name="credentialsRequestHeader" value="X-Auth-Token"/>
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+        <beans:property name="exceptionIfHeaderMissing" value="false"/>
+    </beans:bean>
 
     <beans:bean id="successHandler" class="com.itut.security.AuthenticationSuccessHandler">
         <beans:property name="objectMapper" ref="objectMapper"/>
@@ -29,8 +37,9 @@
 
     <beans:bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
 
-    <authentication-manager>
+    <authentication-manager alias="authenticationManager">
         <authentication-provider ref="userAuthenticationProvider"/>
+        <authentication-provider ref="tokenAuthenticationProvider"/>
     </authentication-manager>
 
     <global-method-security pre-post-annotations="enabled" proxy-target-class="true"/>
