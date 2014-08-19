@@ -12,3 +12,5 @@ dependencies {
     compile project(":user-management:users-rest-api")
     compile project(":user-management:security")
 }
+
+war.archiveName  = 'itut.war'

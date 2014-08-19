@@ -14,7 +14,7 @@
     <bean id="tokenAuthenticationProvider" class="com.itut.security.PreAuthenticatedTokenAuthenticationProvider">
         <property name="tokenService" ref="tokenService"/>
         <property name="userPrincipalService" ref="userPrincipalService"/>
-        <property name="tokenTTL" value="#{ 24 * 3600 }"/>
+        <property name="tokenTTL" value="${security.token.ttl}"/>
     </bean>
 
     <bean id="userAuthenticationService" class="com.itut.security.service.UserAuthenticationServiceImpl"/>
@@ -23,12 +23,12 @@
         <property name="secureRandom">
             <bean class="java.security.SecureRandom"/>
         </property>
-        <property name="serverInteger" value="1312"/>
-        <property name="serverSecret" value="Afuckingamazingserverinteger"/>
-        <property name="pseudoRandomNumberBytes" value="8"/>
+        <property name="serverInteger" value="${security.server.integer}"/>
+        <property name="serverSecret" value="${security.token.server.secret}"/>
+        <property name="pseudoRandomNumberBytes" value="${security.token.pseudoRandomNumberBytes}"/>
     </bean>
 
     <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
-        <constructor-arg value="256"/>
+        <constructor-arg value="${security.password.encoding.sha.strength}"/>
     </bean>
 </beans>
