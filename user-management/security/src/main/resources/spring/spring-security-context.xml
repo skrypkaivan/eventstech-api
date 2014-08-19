@@ -14,6 +14,7 @@
     <bean id="tokenAuthenticationProvider" class="com.itut.security.PreAuthenticatedTokenAuthenticationProvider">
         <property name="tokenService" ref="tokenService"/>
         <property name="userPrincipalService" ref="userPrincipalService"/>
+        <property name="tokenTTL" value="#{ 24 * 3600 }"/>
     </bean>
 
     <bean id="userAuthenticationService" class="com.itut.security.service.UserAuthenticationServiceImpl"/>

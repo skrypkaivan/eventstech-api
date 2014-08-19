@@ -1,5 +1,6 @@
 package com.itut.security;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -20,26 +21,37 @@ public class PreAuthenticatedTokenAuthenticationProvider implements Authenticati
 
     private TokenService tokenService;
     private UserPrincipalService userPrincipalService;
+    private long tokenTTL;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String principal = authentication.getPrincipal().toString();
+        Token token;
         try {
-            Token token = tokenService.verifyToken(authentication.getCredentials().toString());
-            String credentials = token.getExtendedInformation();
-            UserPrincipal userPrincipal = userPrincipalService.findActiveByUsernameAndPassword(principal, credentials);
-            if (userPrincipal == null) {
-                throw new AuthenticationCredentialsNotFoundException("Wrong username or token");
-            }
-            return new UserAuthentication(userPrincipal.getId(),
-                    userPrincipal.getUsername(),
-                    userPrincipal.getPassword(),
-                    new UserAuthenticationDetails(token.getKey()),
-                    userPrincipal.getAuthorities());
+            token = tokenService.verifyToken(authentication.getCredentials().toString());
         } catch (Exception e) {
             LOG.error("Error during token verification for user {}", principal);
             throw new PreAuthenticatedCredentialsNotFoundException(String.format("Error during token verification for user %s", principal), e);
         }
+        if (isTokenExpired(token)) {
+            throw new PreAuthenticatedCredentialsNotFoundException("Token is expired");
+        }
+        String credentials = token.getExtendedInformation();
+        UserPrincipal userPrincipal = userPrincipalService.findActiveByUsernameAndPassword(principal, credentials);
+        if (userPrincipal == null) {
+            throw new AuthenticationCredentialsNotFoundException("Wrong username or token");
+        }
+        return new UserAuthentication(userPrincipal.getId(),
+                userPrincipal.getUsername(),
+                userPrincipal.getPassword(),
+                new UserAuthenticationDetails(token.getKey()),
+                userPrincipal.getAuthorities());
+    }
+
+
+
+    private boolean isTokenExpired(Token token) {
+        return DateTime.now().getMillis() - token.getKeyCreationTime() > tokenTTL;
     }
 
     @Override
@@ -53,5 +65,9 @@ public class PreAuthenticatedTokenAuthenticationProvider implements Authenticati
 
     public void setUserPrincipalService(UserPrincipalService userPrincipalService) {
         this.userPrincipalService = userPrincipalService;
+    }
+
+    public void setTokenTTL(long tokenTTL) {
+        this.tokenTTL = tokenTTL;
     }
 }
