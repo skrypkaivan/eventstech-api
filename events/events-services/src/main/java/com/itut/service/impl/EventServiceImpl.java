@@ -1,6 +1,7 @@
 package com.itut.service.impl;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.itut.db.entity.Event;
 import com.itut.db.entity.User;
@@ -8,11 +9,18 @@ import com.itut.db.repositories.EventRepository;
 import com.itut.rest.dto.EventDto;
 import com.itut.rest.dto.UserDto;
 import com.itut.service.EventService;
+import com.itut.service.ImageService;
+import com.itut.service.exception.ImageUploadingException;
+import org.apache.commons.io.FilenameUtils;
 import org.dozer.DozerBeanMapper;
+import org.joda.time.DateTime;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +32,9 @@ public class EventServiceImpl implements EventService {
 
     private EventRepository eventRepository;
     private DozerBeanMapper dozer;
+    private ImageService imageService;
+    private String logoFolder;
+    private String logoHostName;
 
     @Override
     public EventDto save(EventDto eventDto, UserDto userDto) {
@@ -83,6 +94,16 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public EventDto uploadLogo(MultipartFile logo, Long eventId) throws ImageUploadingException {
+        Event event = eventRepository.findOne(eventId);
+        String fileName = Joiner.on(".").join(Arrays.asList(new DateTime().getMillis(), FilenameUtils.getExtension(logo.getOriginalFilename())));
+        String folder = Joiner.on(File.pathSeparator).join(Arrays.asList(logoFolder, eventId));
+        imageService.uploadImage(logo, fileName, folder);
+        event.setLogo(Joiner.on("/").join(Arrays.asList(logoHostName, eventId, fileName)));
+        return dozer.map(eventRepository.save(event), EventDto.class);
+    }
+
+    @Override
     public void delete(Long id) {
         eventRepository.delete(id);
     }
@@ -107,5 +128,17 @@ public class EventServiceImpl implements EventService {
 
     public void setDozer(DozerBeanMapper dozer) {
         this.dozer = dozer;
+    }
+
+    public void setImageService(ImageService imageService) {
+        this.imageService = imageService;
+    }
+
+    public void setLogoFolder(String logoFolder) {
+        this.logoFolder = logoFolder;
+    }
+
+    public void setLogoHostName(String logoHostName) {
+        this.logoHostName = logoHostName;
     }
 }

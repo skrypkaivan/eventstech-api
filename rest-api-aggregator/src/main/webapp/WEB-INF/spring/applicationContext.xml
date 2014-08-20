@@ -11,7 +11,7 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="file:${itutConfig}/security.properties"/>
+    <context:property-placeholder location="file:${itutConfig}/security.properties,file:${itutConfig}/itut.properties"/>
 
     <import resource="classpath*:spring/spring-db-context.xml"/>
     <import resource="classpath*:spring/spring-events-services-context.xml"/>

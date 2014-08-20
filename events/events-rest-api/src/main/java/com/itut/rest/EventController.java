@@ -6,7 +6,7 @@ import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.security.UserAuthentication;
 import com.itut.security.service.UserAuthenticationService;
 import com.itut.service.EventService;
-import org.dozer.Mapper;
+import com.itut.service.exception.ImageUploadingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,8 +37,22 @@ public class EventController {
     private EventService eventService;
     @Autowired
     private UserAuthenticationService userAuthenticationService;
-    @Autowired
-    private Mapper dozer;
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_CONTENT')")
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<EventDto> uploadLogo(MultipartFile logo, Long eventId, @AuthenticationPrincipal UserAuthentication user) {
+        if (!eventService.exists(eventId)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (!hasRightsToModify(user, eventId)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        try {
+            return new ResponseEntity<>(eventService.uploadLogo(logo, eventId), HttpStatus.OK);
+        } catch (ImageUploadingException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_CONTENT')")
     @RequestMapping(method = RequestMethod.PUT)
