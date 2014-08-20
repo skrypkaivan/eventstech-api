@@ -1,10 +1,12 @@
 package com.itut.rest.dto;
 
+import com.itut.db.entity.SpeakerCategory;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.rest.dto.validation.ValidationMessage;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by vanish on 8/6/14.
@@ -14,11 +16,11 @@ public class SpeakerCategoryDto {
     @NotNull(groups = {ModelExistsValidationGroup.class}, message = ValidationMessage.NOT_NULL)
     private Long _id;
 
-    @NotNull(message = ValidationMessage.NOT_NULL)
+    @Size(max = SpeakerCategory.NAME_LENGTH, message = ValidationMessage.TO_LONG)
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
     private String name;
 
-    @NotNull(message = ValidationMessage.NOT_NULL)
+    @Size(max = SpeakerCategory.SLUG_LENGTH, message = ValidationMessage.TO_LONG)
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
     private String slug;
 

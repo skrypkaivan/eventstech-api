@@ -13,14 +13,17 @@ public class SpeakerCategory {
 
     public static final String TABLE_NAME = "speaker_category";
 
+    public static final int NAME_LENGTH = 100;
+    public static final int SLUG_LENGTH = 30;
+
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(name = "speaker_category_name", nullable = false)
+    @Column(name = "speaker_category_name", nullable = false, length = NAME_LENGTH)
     private String name;
 
-    @Column(name = "slug", nullable = false)
+    @Column(name = "slug", nullable = false, length = SLUG_LENGTH)
     private String slug;
 
     public Long getId() {

@@ -6,7 +6,6 @@ import com.itut.rest.dto.validation.ValidationMessage;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 

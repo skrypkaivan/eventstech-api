@@ -1,11 +1,13 @@
 package com.itut.rest.dto;
 
 
+import com.itut.db.entity.EventCategory;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.rest.dto.validation.ValidationMessage;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Date: 31.07.14
@@ -17,9 +19,11 @@ public class EventCategoryDto {
     @NotNull(groups = {ModelExistsValidationGroup.class}, message = ValidationMessage.NOT_NULL)
     private Long _id;
 
+    @Size(max = EventCategory.NAME_LENGTH, message = ValidationMessage.TO_LONG)
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
     private String name;
 
+    @Size(max = EventCategory.SLUG_LENGTH, message = ValidationMessage.TO_LONG)
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
     private String slug;
 
