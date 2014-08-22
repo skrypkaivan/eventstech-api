@@ -7,10 +7,6 @@
     <mapping>
         <class-a>com.itut.db.entity.EventCategory</class-a>
         <class-b>com.itut.rest.dto.EventCategoryDto</class-b>
-        <field>
-            <a>id</a>
-            <b>_id</b>
-        </field>
     </mapping>
 
     <mapping>
@@ -18,7 +14,7 @@
         <class-b>com.itut.rest.dto.SpeakerCategoryDto</class-b>
         <field>
             <a>id</a>
-            <b>_id</b>
+            <b>id</b>
         </field>
     </mapping>
 
@@ -27,7 +23,7 @@
         <class-b>com.itut.rest.dto.EventDto</class-b>
         <field>
             <a>id</a>
-            <b>_id</b>
+            <b>id</b>
         </field>
         <field>
             <a>categories</a>
@@ -52,7 +48,7 @@
         <class-b>com.itut.rest.dto.SpeakerDto</class-b>
         <field>
             <a>id</a>
-            <b>_id</b>
+            <b>id</b>
         </field>
         <field>
             <a>categories</a>

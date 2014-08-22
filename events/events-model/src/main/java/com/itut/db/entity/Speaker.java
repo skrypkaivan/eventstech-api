@@ -15,7 +15,8 @@ import java.util.Set;
 @NamedQueries(value = {
         @NamedQuery(name = "Speaker.getPopularSpeakers", query = "select s from Speaker s where s.popular is true"),
         @NamedQuery(name = "Speaker.getSpeakerBySlug", query = "select s from Speaker s where s.slug = ?1"),
-        @NamedQuery(name = "Speaker.getByTagSlug", query = "select s from Speaker s join s.categories c where c.slug = ?1")
+        @NamedQuery(name = "Speaker.getByTagSlug", query = "select s from Speaker s join s.categories c where c.slug = ?1"),
+        @NamedQuery(name = "Speaker.getUncategorised", query = "select s from Speaker s where s.categories is empty")
 })
 public class Speaker {
     public static final String TABLE_NAME = "speaker";
@@ -27,10 +28,10 @@ public class Speaker {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "short_desc", nullable = false)
+    @Column(name = "short_desc", nullable = false, columnDefinition = "TEXT")
     private String shortDescription;
 
-    @Column(name = "long_desc", nullable = false)
+    @Column(name = "long_desc", nullable = false, columnDefinition = "TEXT")
     private String longDescription;
 
     @Column(name = "photo", nullable = false)

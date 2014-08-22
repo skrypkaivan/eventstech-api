@@ -56,6 +56,12 @@ public class SpeakerServiceImpl implements SpeakerService {
         return transform(Lists.newArrayList(speakerRepository.getByTagSlug(tagSlug, new PageRequest(pageNumber - 1, pageSize))));
     }
 
+    @Transactional
+    @Override
+    public List<SpeakerDto> getUncategorisedSpeakers(int pageNumber, int pageSize) {
+        return transform(Lists.newArrayList(speakerRepository.getUncategorised(new PageRequest(pageNumber - 1, pageSize))));
+    }
+
     private List<SpeakerDto> transform(List<Speaker> speakers) {
         return Lists.transform(speakers, new Function<Speaker, SpeakerDto>() {
             @Override

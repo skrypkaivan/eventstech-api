@@ -55,11 +55,11 @@ public class SpeakerServiceImplTest extends AbstractDbTest {
         speaker.setPhoto("/home/vanish/photo.png");
         speaker.setShortDescription("short desc");
         SpeakerCategoryDto speakerCategory = new SpeakerCategoryDto();
-        speakerCategory.set_id(category.getId());
+        speakerCategory.setId(category.getId());
         speaker.setTags(Arrays.asList(speakerCategory));
         speaker = speakerService.save(speaker);
 
-        Assert.assertThat(speakerRepository.findOne(speaker.get_id()), notNullValue());
+        Assert.assertThat(speakerRepository.findOne(speaker.getId()), notNullValue());
     }
 
     @Test

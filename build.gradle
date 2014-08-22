@@ -16,6 +16,9 @@ subprojects {
     }
 
     dependencies {
+        compile 'ch.qos.logback:logback-core:1.1.2'
+        compile 'ch.qos.logback:logback-classic:1.1.2'
+        compile "org.slf4j:slf4j-api:1.7.7"
         compile group: 'com.google.guava', name: 'guava', version: '17.0'
         testCompile 'junit:junit:4.11'
         compile group: 'org.springframework', name: 'spring-context', version: '4.0.6.RELEASE'
@@ -51,7 +54,6 @@ subprojects {
         compile group: 'org.springframework.security', name: 'spring-security-core', version: '3.2.4.RELEASE'
         compile group: 'org.springframework.security', name: 'spring-security-config', version: '3.2.4.RELEASE'
         compile 'cglib:cglib:3.1'
-        compile 'com.mangofactory:swagger-springmvc:0.8.3'
         provided group: 'javax.servlet',name:'servlet-api', version:'2.5'
         compile 'aspectj:aspectjweaver:1.5.4'
     }

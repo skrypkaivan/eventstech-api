@@ -1,5 +1,6 @@
 package com.itut.service;
 
+import com.itut.rest.dto.ImageUploadingDto;
 import com.itut.service.exception.ImageUploadingException;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,5 +10,5 @@ import org.springframework.web.multipart.MultipartFile;
  * Copyright © 2014 Statiq, Inc.
  */
 public interface ImageService {
-    void uploadImage(MultipartFile image, String imageName, String folder) throws ImageUploadingException;
+    String uploadImage(ImageUploadingDto imageUploadingDto) throws ImageUploadingException;
 }

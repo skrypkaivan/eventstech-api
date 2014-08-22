@@ -16,4 +16,5 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> getPageSpeakerSlug(String slug, Pageable page);
     List<Event> getPopularEvents(Pageable page);
     List<Event> getByTagSlug(String tagSlug, Pageable page);
+    List<Event> getUncategorisedEvents(Pageable page);
 }

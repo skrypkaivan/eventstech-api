@@ -21,9 +21,6 @@
     </bean>
 
     <bean id="eventService" class="com.itut.service.impl.EventServiceImpl">
-        <property name="logoFolder" value="${event.logo.folder}"/>
-        <property name="logoHostName" value="${event.uploading.files.location.host}"/>
-        <property name="imageService" ref="imageService"/>
         <property name="dozer" ref="dozer"/>
         <property name="eventRepository" ref="eventRepository"/>
     </bean>

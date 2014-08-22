@@ -37,7 +37,7 @@ public class EventCategoryServiceImplTest extends AbstractDbTest {
         eventCategory.setSlug("event");
         eventCategory = eventCategoryService.save(eventCategory);
 
-        Assert.assertThat(eventCategoryRepository.findOne(eventCategory.get_id()), notNullValue());
+        Assert.assertThat(eventCategoryRepository.findOne(eventCategory.getId()), notNullValue());
     }
 
     @Test

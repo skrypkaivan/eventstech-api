@@ -48,10 +48,8 @@ public class PreAuthenticatedTokenAuthenticationProvider implements Authenticati
                 userPrincipal.getAuthorities());
     }
 
-
-
     private boolean isTokenExpired(Token token) {
-        return DateTime.now().getMillis() - token.getKeyCreationTime() > tokenTTL;
+        return token == null || DateTime.now().getMillis() - token.getKeyCreationTime() > tokenTTL;
     }
 
     @Override

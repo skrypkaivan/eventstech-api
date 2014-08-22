@@ -1,7 +1,6 @@
 package com.itut.service.impl;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.itut.db.entity.Event;
 import com.itut.db.entity.User;
@@ -9,18 +8,12 @@ import com.itut.db.repositories.EventRepository;
 import com.itut.rest.dto.EventDto;
 import com.itut.rest.dto.UserDto;
 import com.itut.service.EventService;
-import com.itut.service.ImageService;
-import com.itut.service.exception.ImageUploadingException;
-import org.apache.commons.io.FilenameUtils;
 import org.dozer.DozerBeanMapper;
-import org.joda.time.DateTime;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
+import sun.management.resources.agent;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,9 +25,6 @@ public class EventServiceImpl implements EventService {
 
     private EventRepository eventRepository;
     private DozerBeanMapper dozer;
-    private ImageService imageService;
-    private String logoFolder;
-    private String logoHostName;
 
     @Override
     public EventDto save(EventDto eventDto, UserDto userDto) {
@@ -48,7 +38,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDto update(EventDto eventDto) {
         Event event = dozer.map(eventDto, Event.class);
-        Event eventOldState = eventRepository.getOne(eventDto.get_id());
+        Event eventOldState = eventRepository.getOne(eventDto.getId());
         event.setCreator(eventOldState.getCreator());
         return dozer.map(eventRepository.save(event), EventDto.class);
     }
@@ -76,7 +66,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     @Override
     public List<EventDto> getByTagSlug(String tagSlug, int pageNumber, int pageSize) {
-        return transform(Lists.newArrayList(eventRepository.getByTagSlug(tagSlug, new PageRequest(pageNumber, pageSize))));
+        return transform(Lists.newArrayList(eventRepository.getByTagSlug(tagSlug, new PageRequest(pageNumber - 1, pageSize))));
     }
 
     @Transactional
@@ -93,14 +83,10 @@ public class EventServiceImpl implements EventService {
         return dozer.map(event.getCreator(), UserDto.class);
     }
 
+    @Transactional
     @Override
-    public EventDto uploadLogo(MultipartFile logo, Long eventId) throws ImageUploadingException {
-        Event event = eventRepository.findOne(eventId);
-        String fileName = Joiner.on(".").join(Arrays.asList(new DateTime().getMillis(), FilenameUtils.getExtension(logo.getOriginalFilename())));
-        String folder = Joiner.on(File.pathSeparator).join(Arrays.asList(logoFolder, eventId));
-        imageService.uploadImage(logo, fileName, folder);
-        event.setLogo(Joiner.on("/").join(Arrays.asList(logoHostName, eventId, fileName)));
-        return dozer.map(eventRepository.save(event), EventDto.class);
+    public List<EventDto> getUncategorisedEvents(int pageNumber, int pageSize) {
+        return transform(Lists.newArrayList(eventRepository.getUncategorisedEvents(new PageRequest(pageNumber - 1, pageSize))));
     }
 
     @Override
@@ -128,17 +114,5 @@ public class EventServiceImpl implements EventService {
 
     public void setDozer(DozerBeanMapper dozer) {
         this.dozer = dozer;
-    }
-
-    public void setImageService(ImageService imageService) {
-        this.imageService = imageService;
-    }
-
-    public void setLogoFolder(String logoFolder) {
-        this.logoFolder = logoFolder;
-    }
-
-    public void setLogoHostName(String logoHostName) {
-        this.logoHostName = logoHostName;
     }
 }

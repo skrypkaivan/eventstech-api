@@ -20,7 +20,8 @@ import java.util.Set;
         @NamedQuery(name = "Event.getPageSpeakerSlug", query = "select e from Event e join e.speakers s where s.slug = ?1"),
         @NamedQuery(name = "Event.getPopularEvents", query = "select e from Event e where e.popular is true"),
         @NamedQuery(name = "Event.getByTagSlug", query = "select e from Event e join e.categories c where c.slug = ?1"),
-        @NamedQuery(name = "Event.getBySlug", query = "select e from Event e where e.slug = ?1")
+        @NamedQuery(name = "Event.getBySlug", query = "select e from Event e where e.slug = ?1"),
+        @NamedQuery(name = "Event.getUncategorisedEvents", query = "select e from Event e where e.categories is empty")
 })
 public class Event {
     public static final String TABLE_NAME = "event";
@@ -77,10 +78,10 @@ public class Event {
     @Column(name = "popular")
     private boolean popular;
 
-    @Column(name = "short_desc", nullable = false)
+    @Column(name = "short_desc", nullable = false, columnDefinition = "TEXT")
     private String shortDescription;
 
-    @Column(name = "long_desc", nullable = false)
+    @Column(name = "long_desc", nullable = false, columnDefinition = "TEXT")
     private String longDescription;
 
     @Column(name = "slug", nullable = false)

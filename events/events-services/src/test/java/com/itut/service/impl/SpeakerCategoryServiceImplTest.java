@@ -37,7 +37,7 @@ public class SpeakerCategoryServiceImplTest extends AbstractDbTest {
         speakerCategory.setSlug("event");
         speakerCategory = speakerCategoryService.save(speakerCategory);
 
-        Assert.assertThat(speakerCategoryRepository.findOne(speakerCategory.get_id()), notNullValue());
+        Assert.assertThat(speakerCategoryRepository.findOne(speakerCategory.getId()), notNullValue());
     }
 
     @Test

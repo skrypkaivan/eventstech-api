@@ -1,5 +1,8 @@
 apply plugin: 'idea'
 
+dependencies {
+    compile project(":common:common-model")
+}
 
 idea {
     module {

@@ -39,22 +39,6 @@ public class EventController {
     private UserAuthenticationService userAuthenticationService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_CONTENT')")
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<EventDto> uploadLogo(MultipartFile logo, Long eventId, @AuthenticationPrincipal UserAuthentication user) {
-        if (!eventService.exists(eventId)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        if (!hasRightsToModify(user, eventId)) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        try {
-            return new ResponseEntity<>(eventService.uploadLogo(logo, eventId), HttpStatus.OK);
-        } catch (ImageUploadingException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_CONTENT')")
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<EventDto> createNewEvent(@Validated @RequestBody EventDto eventDto,
                                                    @AuthenticationPrincipal UserAuthentication user) {
@@ -70,10 +54,10 @@ public class EventController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<EventDto> updateEvent(@Validated(ModelExistsValidationGroup.class) @RequestBody EventDto eventDto,
                                                 @AuthenticationPrincipal UserAuthentication user) {
-        if (!eventService.exists(eventDto.get_id())) {
+        if (!eventService.exists(eventDto.getId())) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if (!hasRightsToModify(user, eventDto.get_id())) {
+        if (!hasRightsToModify(user, eventDto.getId())) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(eventService.update(eventDto), HttpStatus.OK);
@@ -101,6 +85,12 @@ public class EventController {
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/popular")
     public ResponseEntity<List<EventDto>> getPopularEvents(@RequestParam(defaultValue = DEFAULT_POPULAR_COUNT) int count) {
         return new ResponseEntity<>(eventService.getPopularEvent(count), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/tag/uncategorised")
+    public ResponseEntity<List<EventDto>> getUncategorisedEvents(@RequestParam(value = "page_num", defaultValue = DEFAULT_PAGE) int pageNumber,
+                                                                 @RequestParam(value = "page_size", defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
+        return new ResponseEntity<>(eventService.getUncategorisedEvents(pageNumber, pageSize), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/tag/{tag}")

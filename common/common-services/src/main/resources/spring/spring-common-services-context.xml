@@ -7,5 +7,18 @@
         <property name="mappingFiles" value="classpath*:dozer/*mappings.xml"/>
     </bean>
 
-    <bean id="imageService" class="com.itut.service.impl.ImageServiceImpl"/>
+    <bean id="imageService" class="com.itut.service.impl.ImageServiceImpl">
+        <property name="imageType2UploadingFolder">
+            <map>
+                <entry key="EVENT" value="${event.logo.upload.folder}"/>
+                <entry key="SPEAKER" value="${speaker.photo.upload.folder}"/>
+            </map>
+        </property>
+        <property name="imageType2Url">
+            <map>
+                <entry key="EVENT" value="${event.uploading.files.location.host}"/>
+                <entry key="SPEAKER" value="${speaker.uploading.files.location.host}"/>
+            </map>
+        </property>
+    </bean>
 </beans>

@@ -1,5 +1,6 @@
 package com.itut.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.itut.db.entity.SpeakerCategory;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.rest.dto.validation.ValidationMessage;
@@ -14,7 +15,8 @@ import javax.validation.constraints.Size;
 public class SpeakerCategoryDto {
 
     @NotNull(groups = {ModelExistsValidationGroup.class}, message = ValidationMessage.NOT_NULL)
-    private Long _id;
+    @JsonProperty("_id")
+    private Long id;
 
     @Size(max = SpeakerCategory.NAME_LENGTH, message = ValidationMessage.TO_LONG)
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
@@ -32,12 +34,12 @@ public class SpeakerCategoryDto {
         this.slug = slug;
     }
 
-    public Long get_id() {
-        return _id;
+    public Long getId() {
+        return id;
     }
 
-    public void set_id(Long _id) {
-        this._id = _id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

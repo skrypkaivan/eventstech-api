@@ -20,4 +20,6 @@ public interface SpeakerService {
     List<SpeakerDto> getPage(int pageNumber, int pageSize);
 
     List<SpeakerDto> getByTagSlug(String tagSlug, int pageNumber, int pageSize);
+
+    List<SpeakerDto> getUncategorisedSpeakers(int pageNumber, int pageSize);
 }

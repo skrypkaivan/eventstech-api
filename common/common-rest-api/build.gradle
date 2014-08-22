@@ -8,6 +8,7 @@ idea {
 
 dependencies {
     compile project (path: ':common:common-model')
+    compile project (path: ':common:common-services')
 }
 
 jar.archiveName = 'common-rest-api-' + project.version + '.jar'

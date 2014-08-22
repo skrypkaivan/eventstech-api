@@ -14,8 +14,6 @@ import java.util.List;
  */
 public interface EventService {
 
-    EventDto uploadLogo(MultipartFile logo, Long eventId) throws ImageUploadingException;
-
     EventDto save(EventDto eventDto, UserDto userDto);
 
     EventDto update(EventDto eventDto);
@@ -29,6 +27,8 @@ public interface EventService {
     List<EventDto> getPopularEvent(int count);
 
     List<EventDto> getByTagSlug(String tagSlug, int pageNumber, int pageSize);
+
+    List<EventDto> getUncategorisedEvents(int pageNumber, int pageSize);
 
     UserDto getEventCreator(Long eventId);
 

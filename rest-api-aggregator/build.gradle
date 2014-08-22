@@ -1,6 +1,8 @@
 apply plugin: 'war'
 
 dependencies {
+    compile 'ch.qos.logback:logback-core'
+    compile 'ch.qos.logback:logback-classic'
     compile project(":events:events-services")
     compile project(":common:data-source")
     compile project(":events:events-model")

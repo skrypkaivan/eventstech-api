@@ -1,5 +1,6 @@
 package com.itut.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.rest.dto.validation.ValidationMessage;
@@ -17,7 +18,8 @@ import java.util.List;
 public class EventDto {
 
     @NotNull(groups = {ModelExistsValidationGroup.class}, message = ValidationMessage.NOT_NULL)
-    private Long _id;
+    @JsonProperty("_id")
+    private Long id;
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
     private String name;
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
@@ -43,12 +45,12 @@ public class EventDto {
     private List<EventCategoryDto> tags = Lists.newArrayList();
     private List<SpeakerDto> speakers = Lists.newArrayList();
 
-    public Long get_id() {
-        return _id;
+    public Long getId() {
+        return id;
     }
 
-    public void set_id(Long _id) {
-        this._id = _id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

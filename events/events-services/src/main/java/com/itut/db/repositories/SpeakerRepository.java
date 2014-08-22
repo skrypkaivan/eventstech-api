@@ -18,4 +18,6 @@ public interface SpeakerRepository extends JpaRepository<Speaker, Long> {
     Speaker getSpeakerBySlug(String slug);
 
     List<Speaker> getByTagSlug(String tagSlug, Pageable page);
+
+    List<Speaker> getUncategorised(Pageable page);
 }

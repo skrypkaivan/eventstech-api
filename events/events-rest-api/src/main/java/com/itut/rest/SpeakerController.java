@@ -53,7 +53,7 @@ public class SpeakerController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{speakerId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{speakerId}", consumes = MediaType.ALL_VALUE)
     public ResponseEntity deleteSpeaker(@PathVariable Long speakerId) {
         speakerService.delete(speakerId);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -75,6 +75,12 @@ public class SpeakerController {
             return new ResponseEntity<>(speaker, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/tag/uncategorised")
+    public ResponseEntity<List<SpeakerDto>> getUncategorisedSpeakers(@RequestParam(value = "page_num", defaultValue = DEFAULT_PAGE) int pageNumber,
+                                                                     @RequestParam(value = "page_size", defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
+        return new ResponseEntity<>(speakerService.getUncategorisedSpeakers(pageNumber, pageSize), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/tag/{tag}")
