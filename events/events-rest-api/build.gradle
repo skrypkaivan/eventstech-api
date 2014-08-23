@@ -1,6 +1,7 @@
 apply plugin: 'idea'
 
 dependencies {
+    compile project(':common:common-services')
 	compile project(':common:data-source')
     compile project(':events:events-model')
     compile project(':events:events-services')

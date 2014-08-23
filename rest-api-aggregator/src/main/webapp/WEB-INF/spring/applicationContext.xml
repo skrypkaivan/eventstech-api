@@ -11,9 +11,10 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="file:${itutConfig}/security.properties,file:${itutConfig}/itut.properties"/>
+    <context:property-placeholder location="file:${itutConfig}/security.properties,file:${itutConfig}/itut.properties,file:${itutConfig}/elasticsearch.properties"/>
 
     <import resource="classpath*:spring/spring-db-context.xml"/>
+    <import resource="classpath*:spring/spring-search-context.xml"/>
     <import resource="classpath*:spring/spring-events-services-context.xml"/>
     <import resource="classpath*:spring/spring-user-managements-services-context.xml"/>
 

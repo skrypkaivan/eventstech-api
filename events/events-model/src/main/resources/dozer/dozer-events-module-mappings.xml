@@ -5,26 +5,8 @@
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
     <mapping>
-        <class-a>com.itut.db.entity.EventCategory</class-a>
-        <class-b>com.itut.rest.dto.EventCategoryDto</class-b>
-    </mapping>
-
-    <mapping>
-        <class-a>com.itut.db.entity.SpeakerCategory</class-a>
-        <class-b>com.itut.rest.dto.SpeakerCategoryDto</class-b>
-        <field>
-            <a>id</a>
-            <b>id</b>
-        </field>
-    </mapping>
-
-    <mapping>
         <class-a>com.itut.db.entity.Event</class-a>
         <class-b>com.itut.rest.dto.EventDto</class-b>
-        <field>
-            <a>id</a>
-            <b>id</b>
-        </field>
         <field>
             <a>categories</a>
             <b>tags</b>
@@ -46,10 +28,6 @@
     <mapping>
         <class-a>com.itut.db.entity.Speaker</class-a>
         <class-b>com.itut.rest.dto.SpeakerDto</class-b>
-        <field>
-            <a>id</a>
-            <b>id</b>
-        </field>
         <field>
             <a>categories</a>
             <b>tags</b>

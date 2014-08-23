@@ -69,8 +69,8 @@ public class EventController {
         return new ResponseEntity<>(eventService.getPage(pageNumber, pageSize), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_CONTENT')")
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{speakerId}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_CONTENT')")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{eventId}", consumes = MediaType.ALL_VALUE)
     public ResponseEntity deleteEvent(@PathVariable Long eventId, @AuthenticationPrincipal UserAuthentication user) {
         if (!eventService.exists(eventId)) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);

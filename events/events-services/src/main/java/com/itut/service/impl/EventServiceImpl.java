@@ -2,18 +2,22 @@ package com.itut.service.impl;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.itut.annotation.DeleteIndex;
+import com.itut.annotation.Indexed;
+import com.itut.annotation.IndexedEntityType;
 import com.itut.db.entity.Event;
 import com.itut.db.entity.User;
 import com.itut.db.repositories.EventRepository;
 import com.itut.rest.dto.EventDto;
 import com.itut.rest.dto.UserDto;
+import com.itut.search.entity.EventDocument;
+import com.itut.search.repositories.EventSearchRepository;
+import com.itut.search.repositories.SpeakerSearchRepository;
 import com.itut.service.EventService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
-import sun.management.resources.agent;
-
 import java.util.List;
 
 /**
@@ -26,6 +30,8 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
     private DozerBeanMapper dozer;
 
+
+    @Indexed(repository = EventSearchRepository.class, documentClass = EventDocument.class, type = IndexedEntityType.RETURN_VALUE)
     @Override
     public EventDto save(EventDto eventDto, UserDto userDto) {
         Event event = dozer.map(eventDto, Event.class);
@@ -34,6 +40,7 @@ public class EventServiceImpl implements EventService {
         return dozer.map(eventRepository.save(event), EventDto.class);
     }
 
+    @Indexed(repository = EventSearchRepository.class, documentClass = EventDocument.class, type = IndexedEntityType.RETURN_VALUE)
     @Transactional
     @Override
     public EventDto update(EventDto eventDto) {
@@ -89,6 +96,7 @@ public class EventServiceImpl implements EventService {
         return transform(Lists.newArrayList(eventRepository.getUncategorisedEvents(new PageRequest(pageNumber - 1, pageSize))));
     }
 
+    @DeleteIndex(repository = EventSearchRepository.class, indexParameterName = "id")
     @Override
     public void delete(Long id) {
         eventRepository.delete(id);

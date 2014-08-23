@@ -1,5 +1,7 @@
 package com.itut.db.entity;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import javax.persistence.*;
 import java.util.Set;
 
