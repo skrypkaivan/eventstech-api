@@ -23,6 +23,7 @@ public class SpeakerDocument {
     private String longDescription;
     private boolean popular;
     private String slug;
+    private String photo;
     @Field(type = FieldType.Nested)
     private List<SpeakerCategoryDocument> tags = Lists.newArrayList();
 
@@ -80,5 +81,13 @@ public class SpeakerDocument {
 
     public void setTags(List<SpeakerCategoryDocument> tags) {
         this.tags = tags;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

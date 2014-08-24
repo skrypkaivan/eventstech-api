@@ -1,10 +1,12 @@
 package com.itut.rest;
 
+import com.google.common.collect.Lists;
 import com.itut.rest.dto.EventDto;
 import com.itut.rest.dto.SpeakerDto;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.service.EventService;
 import com.itut.service.SpeakerService;
+import com.itut.service.search.SpeakerSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,6 +35,8 @@ public class SpeakerController {
     private SpeakerService speakerService;
     @Autowired
     private EventService eventService;
+    @Autowired
+    private SpeakerSearchService speakerSearchService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.PUT)
@@ -88,5 +92,10 @@ public class SpeakerController {
                                                           @RequestParam(value = "page_num", defaultValue = DEFAULT_PAGE) int pageNumber,
                                                           @RequestParam(value = "page_size", defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
         return new ResponseEntity<>(speakerService.getByTagSlug(tag, pageNumber, pageSize), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/search/nameorslug")
+    public ResponseEntity<List<SpeakerDto>> findByNameOrSlug(@RequestParam("s") String searchQuery) {
+        return new ResponseEntity<>(speakerSearchService.searchByNameOrSlug(searchQuery), HttpStatus.OK);
     }
 }
