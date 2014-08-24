@@ -3,6 +3,7 @@ package com.itut.rest;
 import com.itut.rest.dto.EventCategoryDto;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.service.EventCategoryService;
+import com.itut.service.search.EventCategorySearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,6 +28,8 @@ public class EventCategoryController {
 
     @Autowired
     private EventCategoryService eventCategoryService;
+    @Autowired
+    private EventCategorySearchService eventCategorySearchService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.PUT)
@@ -51,5 +54,10 @@ public class EventCategoryController {
     public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
         eventCategoryService.delete(categoryId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/search", consumes = MediaType.ALL_VALUE)
+    public ResponseEntity<List<EventCategoryDto>> findCategory(@RequestParam("s") String searchString) {
+        return new ResponseEntity<>(eventCategorySearchService.search(searchString), HttpStatus.OK);
     }
 }

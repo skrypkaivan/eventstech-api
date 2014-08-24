@@ -5,6 +5,7 @@ import com.itut.rest.dto.SpeakerCategoryDto;
 import com.itut.rest.dto.ValidationErrorDto;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.service.SpeakerCategoryService;
+import com.itut.service.search.SpeakerCategorySearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,6 +31,8 @@ public class SpeakerCategoryController {
     
     @Autowired
     private SpeakerCategoryService speakerCategoryService;
+    @Autowired
+    private SpeakerCategorySearchService speakerCategorySearchService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     @RequestMapping(method = RequestMethod.PUT)
@@ -54,5 +57,10 @@ public class SpeakerCategoryController {
     public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
         speakerCategoryService.delete(categoryId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/search", consumes = MediaType.ALL_VALUE)
+    public ResponseEntity<List<SpeakerCategoryDto>> search(@RequestParam("s") String searchQuery) {
+        return new ResponseEntity<>(speakerCategorySearchService.search(searchQuery), HttpStatus.OK);
     }
 }

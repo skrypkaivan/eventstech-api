@@ -1,9 +1,17 @@
 package com.itut.search.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 /**
  * Created by vanish on 8/23/14.
  */
+@Document(indexName = "itut", type = EventCategoryDocument.DOCUMENT_NAME)
 public class EventCategoryDocument {
+
+    public static final String DOCUMENT_NAME = "event_category";
+
+    @Id
     private Long id;
     private String name;
     private String slug;

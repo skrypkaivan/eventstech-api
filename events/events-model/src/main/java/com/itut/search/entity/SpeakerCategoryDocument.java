@@ -1,14 +1,20 @@
 package com.itut.search.entity;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * Created by vanish on 8/23/14.
  */
+@Document(indexName = "itut", type = SpeakerCategoryDocument.DOCUMENT_NAME)
 public class SpeakerCategoryDocument {
+
+    public static final String DOCUMENT_NAME = "speaker_category";
+
+    @Id
+    private Long id;
     private String name;
     private String slug;
-    private Long id;
 
     public Long getId() {
         return id;

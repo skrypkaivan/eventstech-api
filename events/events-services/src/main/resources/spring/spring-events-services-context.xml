@@ -10,6 +10,16 @@
         <property name="eventCategoryRepository" ref="eventCategoryRepository"/>
     </bean>
 
+    <bean id="eventCategorySearchService" class="com.itut.service.search.impl.EventCategorySearchServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="eventCategorySearchRepository" ref="eventCategorySearchRepository"/>
+    </bean>
+
+    <bean id="speakerCategorySearchService" class="com.itut.service.search.impl.SpeakerCategorySearchServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="speakerCategorySearchRepository" ref="speakerCategorySearchRepository"/>
+    </bean>
+
     <bean id="speakerService" class="com.itut.service.impl.SpeakerServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="speakerRepository" ref="speakerRepository"/>
