@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface EventCategorySearchService {
 
-    List<EventCategoryDto> search(String searchQuery);
+    List<EventCategoryDto> autocomplete(String searchQuery);
 }

@@ -7,6 +7,8 @@ import com.itut.search.entity.SpeakerCategoryDocument;
 import com.itut.search.repositories.SpeakerCategorySearchRepository;
 import com.itut.service.search.SpeakerCategorySearchService;
 import org.dozer.DozerBeanMapper;
+import org.elasticsearch.common.unit.Fuzziness;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -21,8 +23,10 @@ public class SpeakerCategorySearchServiceImpl implements SpeakerCategorySearchSe
     private DozerBeanMapper dozer;
 
     @Override
-    public List<SpeakerCategoryDto> search(String queryString) {
-        QueryBuilder query = QueryBuilders.fuzzyLikeThisQuery("name","slug").likeText(queryString);
+    public List<SpeakerCategoryDto> autocomplete(String queryString) {
+        QueryBuilder query = QueryBuilders
+                .multiMatchQuery(queryString, "name", "slug")
+                .type(MultiMatchQueryBuilder.Type.BEST_FIELDS);
         return Lists.transform(Lists.newArrayList(speakerCategorySearchRepository.search(query)), new Function<SpeakerCategoryDocument, SpeakerCategoryDto>() {
             @Override
             public SpeakerCategoryDto apply(SpeakerCategoryDocument input) {

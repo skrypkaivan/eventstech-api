@@ -8,5 +8,5 @@ import java.util.List;
  * Created by vanish on 8/24/14.
  */
 public interface SpeakerCategorySearchService {
-    List<SpeakerCategoryDto> search(String query);
+    List<SpeakerCategoryDto> autocomplete(String query);
 }

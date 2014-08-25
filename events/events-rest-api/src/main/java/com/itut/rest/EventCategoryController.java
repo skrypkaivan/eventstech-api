@@ -56,8 +56,8 @@ public class EventCategoryController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/search", consumes = MediaType.ALL_VALUE)
+    @RequestMapping(method = RequestMethod.GET, value="/autocomplete", consumes = MediaType.ALL_VALUE)
     public ResponseEntity<List<EventCategoryDto>> findCategory(@RequestParam("s") String searchString) {
-        return new ResponseEntity<>(eventCategorySearchService.search(searchString), HttpStatus.OK);
+        return new ResponseEntity<>(eventCategorySearchService.autocomplete(searchString), HttpStatus.OK);
     }
 }

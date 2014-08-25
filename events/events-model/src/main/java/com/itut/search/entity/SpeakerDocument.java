@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by vanish on 8/23/14.
  */
 @Document(type = SpeakerDocument.DOCUMENT_NAME, indexName = "itut")
+@Setting(settingPath = "elasticsearch/settings/ngram_tokenizer.json")
 public class SpeakerDocument {
 
     public static final String DOCUMENT_NAME = "speaker";

@@ -2,11 +2,13 @@ package com.itut.search.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 /**
  * Created by vanish on 8/23/14.
  */
 @Document(indexName = "itut", type = SpeakerCategoryDocument.DOCUMENT_NAME)
+@Setting(settingPath = "elasticsearch/settings/ngram_tokenizer.json")
 public class SpeakerCategoryDocument {
 
     public static final String DOCUMENT_NAME = "speaker_category";

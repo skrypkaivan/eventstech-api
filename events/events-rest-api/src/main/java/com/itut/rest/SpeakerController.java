@@ -1,6 +1,5 @@
 package com.itut.rest;
 
-import com.google.common.collect.Lists;
 import com.itut.rest.dto.EventDto;
 import com.itut.rest.dto.SpeakerDto;
 import com.itut.rest.dto.validation.ModelExistsValidationGroup;
@@ -94,8 +93,8 @@ public class SpeakerController {
         return new ResponseEntity<>(speakerService.getByTagSlug(tag, pageNumber, pageSize), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/search/nameorslug")
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/autocomplete")
     public ResponseEntity<List<SpeakerDto>> findByNameOrSlug(@RequestParam("s") String searchQuery) {
-        return new ResponseEntity<>(speakerSearchService.searchByNameOrSlug(searchQuery), HttpStatus.OK);
+        return new ResponseEntity<>(speakerSearchService.autocomplete(searchQuery), HttpStatus.OK);
     }
 }

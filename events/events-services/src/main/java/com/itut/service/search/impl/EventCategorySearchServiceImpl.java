@@ -22,8 +22,10 @@ public class EventCategorySearchServiceImpl implements EventCategorySearchServic
     private DozerBeanMapper dozer;
 
     @Override
-    public List<EventCategoryDto> search(String searchQuery) {
-        QueryBuilder query = QueryBuilders.fuzzyLikeThisQuery("name","slug").likeText(searchQuery);
+    public List<EventCategoryDto> autocomplete(String searchQuery) {
+        QueryBuilder query = QueryBuilders
+                .multiMatchQuery(searchQuery, "name", "slug")
+                .type(MultiMatchQueryBuilder.Type.BEST_FIELDS);
         return Lists.transform(Lists.newArrayList(eventCategorySearchRepository.search(query)), new Function<EventCategoryDocument, EventCategoryDto>() {
             @Override
             public EventCategoryDto apply(EventCategoryDocument input) {
