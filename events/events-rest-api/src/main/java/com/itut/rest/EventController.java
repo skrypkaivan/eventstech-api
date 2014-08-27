@@ -6,7 +6,7 @@ import com.itut.rest.dto.validation.ModelExistsValidationGroup;
 import com.itut.security.UserAuthentication;
 import com.itut.security.service.UserAuthenticationService;
 import com.itut.service.EventService;
-import com.itut.service.exception.ImageUploadingException;
+import com.itut.service.search.EventSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,9 +31,12 @@ public class EventController {
     public static final String DEFAULT_PAGE = "1";
     public static final String DEFAULT_PAGE_SIZE = "10";
     public static final String DEFAULT_POPULAR_COUNT = "4";
+    public static final String DEFAULT_SIMILAR_COUNT = "4";
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private EventSearchService eventSearchService;
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
@@ -107,6 +109,16 @@ public class EventController {
             return new ResponseEntity<>(eventDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/{slug}/similar")
+    public ResponseEntity<List<EventDto>> findSimilar(@PathVariable("slug") String slug,
+                                                      @RequestParam(value = "count", defaultValue = DEFAULT_SIMILAR_COUNT) int count) {
+        EventDto eventDto = eventService.getBySlug(slug);
+        if (eventDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(eventSearchService.findSimilar(eventDto, count), HttpStatus.OK);
     }
 
     private boolean hasRightsToModify(UserAuthentication user, Long eventId) {

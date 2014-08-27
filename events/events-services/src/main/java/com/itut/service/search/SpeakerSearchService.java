@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface SpeakerSearchService {
     List<SpeakerDto> autocomplete(String searchQuery);
+    List<SpeakerDto> findSimilar(SpeakerDto speaker, int count);
 }

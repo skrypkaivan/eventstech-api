@@ -29,6 +29,7 @@ public class SpeakerController {
     public static final String DEFAULT_PAGE = "1";
     public static final String DEFAULT_PAGE_SIZE = "10";
     public static final String DEFAULT_POPULAR_COUNT = "4";
+    public static final String DEFAULT_SIMILAR_COUNT = "4";
 
     @Autowired
     private SpeakerService speakerService;
@@ -96,5 +97,15 @@ public class SpeakerController {
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/autocomplete")
     public ResponseEntity<List<SpeakerDto>> findByNameOrSlug(@RequestParam("s") String searchQuery) {
         return new ResponseEntity<>(speakerSearchService.autocomplete(searchQuery), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/{slug}/similar")
+    public ResponseEntity<List<SpeakerDto>> findSimilar(@PathVariable("slug") String slug,
+                                                        @RequestParam(value = "count", defaultValue = DEFAULT_SIMILAR_COUNT) int count) {
+        SpeakerDto speakerDto = speakerService.getSpeakerBySlug(slug);
+        if (speakerDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(speakerSearchService.findSimilar(speakerDto, count), HttpStatus.OK);
     }
 }

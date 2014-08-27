@@ -39,4 +39,9 @@
         <property name="dozer" ref="dozer"/>
         <property name="speakerSearchRepository" ref="speakerSearchRepository"/>
     </bean>
+
+    <bean id="eventSearchService" class="com.itut.service.search.impl.EventSearchServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="eventSearchRepository" ref="eventSearchRepository"/>
+    </bean>
 </beans>
