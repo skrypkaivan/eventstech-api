@@ -1,30 +1,22 @@
 package com.itut.search.entity;
 
-import org.springframework.data.annotation.Id;
+import com.itut.seach.entity.AbstractDocument;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Setting;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * Created by vanish on 8/23/14.
  */
-@Document(indexName = "itut", type = SpeakerCategoryDocument.DOCUMENT_NAME)
-@Setting(settingPath = "elasticsearch/settings/ngram_tokenizer.json")
-public class SpeakerCategoryDocument {
+@Document(indexName = AbstractDocument.INDEX_NAME, type = SpeakerCategoryDocument.TYPE)
+public class SpeakerCategoryDocument extends AbstractDocument<Long> {
 
-    public static final String DOCUMENT_NAME = "speaker_category";
+    public static final String TYPE = "speaker_category";
 
-    @Id
-    private Long id;
+    @Field(indexAnalyzer = "itut_ngram_analyzer", type = FieldType.String)
     private String name;
+    @Field(indexAnalyzer = "itut_ngram_analyzer", type = FieldType.String)
     private String slug;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -40,5 +32,10 @@ public class SpeakerCategoryDocument {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 }
