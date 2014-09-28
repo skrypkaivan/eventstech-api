@@ -4,11 +4,11 @@ chmod 400 conf/prod/deployment/eventstech-key.pem
 
 ssh -i conf/prod/deployment//eventstech-key.pem ubuntu@${APPLICATION_SERVER_IP} 'bash -s' <<'ENDSSH'
     bash /home/ubuntu/tomcat/bin/shutdown.sh
-    rm -r /home/ubuntu/tomcat/webapps/eventstech
-    rm -r /home/ubuntu/tomcat/work/localhost/eventstech
+    rm -rf /home/ubuntu/tomcat/webapps/eventstech
+    rm -rf /home/ubuntu/tomcat/work/localhost/eventstech
     rm /home/ubuntu/tomcat/conf/context.xml
     rm -r /home/ubuntu/tomcat/logs/*
-    rm /home/ubuntu/tomcat/webapps/eventstech.war
+    rm -f /home/ubuntu/tomcat/webapps/eventstech.war
     rm -r /home/ubuntu/conf/*
 ENDSSH
 
