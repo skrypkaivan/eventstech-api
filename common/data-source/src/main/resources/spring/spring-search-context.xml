@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch-1.0.xsd">
 
-    <elasticsearch:repositories base-package="com.itut.search.repositories"/>
+    <elasticsearch:repositories base-package="com.eventstech.search.repositories"/>
 
     <elasticsearch:transport-client id="elasticSearchClient" cluster-nodes="${elasticsearch.nodes}"/>
 

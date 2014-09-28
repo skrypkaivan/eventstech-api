@@ -5,42 +5,42 @@
 
     <import resource="classpath*:spring/spring-common-services-context.xml"/>
 
-    <bean id="eventCategoryService" class="com.itut.service.impl.EventCategoryServiceImpl">
+    <bean id="eventCategoryService" class="com.eventstech.service.impl.EventCategoryServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="eventCategoryRepository" ref="eventCategoryRepository"/>
     </bean>
 
-    <bean id="eventCategorySearchService" class="com.itut.service.search.impl.EventCategorySearchServiceImpl">
+    <bean id="eventCategorySearchService" class="com.eventstech.service.search.impl.EventCategorySearchServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="eventCategorySearchRepository" ref="eventCategorySearchRepository"/>
     </bean>
 
-    <bean id="speakerCategorySearchService" class="com.itut.service.search.impl.SpeakerCategorySearchServiceImpl">
+    <bean id="speakerCategorySearchService" class="com.eventstech.service.search.impl.SpeakerCategorySearchServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="speakerCategorySearchRepository" ref="speakerCategorySearchRepository"/>
     </bean>
 
-    <bean id="speakerService" class="com.itut.service.impl.SpeakerServiceImpl">
+    <bean id="speakerService" class="com.eventstech.service.impl.SpeakerServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="speakerRepository" ref="speakerRepository"/>
     </bean>
 
-    <bean id="speakerCategoryService" class="com.itut.service.impl.SpeakerCategoryServiceImpl">
+    <bean id="speakerCategoryService" class="com.eventstech.service.impl.SpeakerCategoryServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="speakerCategoryRepository" ref="speakerCategoryRepository"/>
     </bean>
 
-    <bean id="eventService" class="com.itut.service.impl.EventServiceImpl">
+    <bean id="eventService" class="com.eventstech.service.impl.EventServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="eventRepository" ref="eventRepository"/>
     </bean>
 
-    <bean id="speakerSearchCategory" class="com.itut.service.search.impl.SpeakerSearchServiceImpl">
+    <bean id="speakerSearchCategory" class="com.eventstech.service.search.impl.SpeakerSearchServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="speakerSearchRepository" ref="speakerSearchRepository"/>
     </bean>
 
-    <bean id="eventSearchService" class="com.itut.service.search.impl.EventSearchServiceImpl">
+    <bean id="eventSearchService" class="com.eventstech.service.search.impl.EventSearchServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="eventSearchRepository" ref="eventSearchRepository"/>
     </bean>

@@ -12,7 +12,7 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="mySql.jpa"/>
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.itut.db.entity"/>
+        <property name="packagesToScan" value="com.eventstech.db.entity"/>
         <property name="jpaVendorAdapter" ref="hibernateJpaAdapter"/>
     </bean>
 
@@ -29,7 +29,7 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <jpa:repositories base-package="com.itut.db.repositories"/>
+    <jpa:repositories base-package="com.eventstech.db.repositories"/>
 
     <beans profile="standalone">
 

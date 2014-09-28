@@ -62,7 +62,7 @@ subprojects {
     }
 
     version = '1.0-SNAPSHOT'
-    group = "com.itut"
+    group = "com.eventstech"
 
     jar {
         manifest.attributes provider: 'gradle'

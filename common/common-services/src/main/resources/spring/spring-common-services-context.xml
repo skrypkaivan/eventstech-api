@@ -11,7 +11,7 @@
         <property name="mappingFiles" value="classpath*:dozer/*mappings.xml"/>
     </bean>
 
-    <bean id="imageService" class="com.itut.service.impl.ImageServiceImpl">
+    <bean id="imageService" class="com.eventstech.service.impl.ImageServiceImpl">
         <property name="imageType2UploadingFolder">
             <map>
                 <entry key="EVENT" value="${event.logo.upload.folder}"/>
@@ -28,7 +28,7 @@
 
     <bean id="parameterNameDiscover" class="org.springframework.core.DefaultParameterNameDiscoverer"/>
 
-    <bean id="indexAspect" class="com.itut.aspect.IndexAspect">
+    <bean id="indexAspect" class="com.eventstech.aspect.IndexAspect">
         <property name="dozer" ref="dozer"/>
         <property name="parameterNameDiscoverer" ref="parameterNameDiscover"/>
     </bean>

@@ -5,19 +5,19 @@
 
     <import resource="classpath*:spring/spring-user-managements-services-context.xml"/>
 
-    <bean id="userAuthenticationProvider" class="com.itut.security.LoginPasswordAuthenticationProvider">
+    <bean id="userAuthenticationProvider" class="com.eventstech.security.LoginPasswordAuthenticationProvider">
         <property name="userPrincipalService" ref="userPrincipalService"/>
         <property name="passwordEncoder" ref="passwordEncoder"/>
         <property name="tokenService" ref="tokenService"/>
     </bean>
 
-    <bean id="tokenAuthenticationProvider" class="com.itut.security.PreAuthenticatedTokenAuthenticationProvider">
+    <bean id="tokenAuthenticationProvider" class="com.eventstech.security.PreAuthenticatedTokenAuthenticationProvider">
         <property name="tokenService" ref="tokenService"/>
         <property name="userPrincipalService" ref="userPrincipalService"/>
         <property name="tokenTTL" value="${security.token.ttl}"/>
     </bean>
 
-    <bean id="userAuthenticationService" class="com.itut.security.service.UserAuthenticationServiceImpl"/>
+    <bean id="userAuthenticationService" class="com.eventstech.security.service.UserAuthenticationServiceImpl"/>
 
     <bean id="tokenService" class="org.springframework.security.core.token.KeyBasedPersistenceTokenService">
         <property name="secureRandom">

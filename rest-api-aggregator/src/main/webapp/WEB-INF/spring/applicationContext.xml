@@ -11,20 +11,20 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="file:${itutConfig}/security.properties,file:${itutConfig}/itut.properties,file:${itutConfig}/elasticsearch.properties"/>
+    <context:property-placeholder location="file:${eventstechConfig}/security.properties,file:${eventstechConfig}/eventstech.properties,file:${eventstechConfig}/elasticsearch.properties"/>
 
     <import resource="classpath*:spring/spring-db-context.xml"/>
     <import resource="classpath*:spring/spring-search-context.xml"/>
     <import resource="classpath*:spring/spring-events-services-context.xml"/>
     <import resource="classpath*:spring/spring-user-managements-services-context.xml"/>
 
-    <context:component-scan base-package="com.itut.rest"/>
+    <context:component-scan base-package="com.eventstech.rest"/>
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
-                    <bean class="com.itut.jackson.ItutObjectMapper" init-method="init"/>
+                    <bean class="com.eventstech.jackson.EventsTechObjectMapper" init-method="init"/>
                 </property>
             </bean>
         </mvc:message-converters>

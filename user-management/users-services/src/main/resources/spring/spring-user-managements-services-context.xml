@@ -5,7 +5,7 @@
 
     <import resource="classpath*:spring/spring-common-services-context.xml"/>
 
-    <bean id="userPrincipalService" class="com.itut.security.impl.UserPrincipalServiceImpl">
+    <bean id="userPrincipalService" class="com.eventstech.security.impl.UserPrincipalServiceImpl">
         <property name="dozer" ref="dozer"/>
         <property name="userRepository" ref="userRepository"/>
     </bean>

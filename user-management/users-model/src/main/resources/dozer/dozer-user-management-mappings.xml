@@ -5,18 +5,18 @@
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
     <mapping>
-        <class-a>com.itut.db.entity.User</class-a>
-        <class-b>com.itut.rest.dto.UserDto</class-b>
+        <class-a>com.eventstech.db.entity.User</class-a>
+        <class-b>com.eventstech.rest.dto.UserDto</class-b>
     </mapping>
 
     <mapping>
-        <class-a>com.itut.db.entity.UserRole</class-a>
-        <class-b>com.itut.rest.dto.UserRoleDto</class-b>
+        <class-a>com.eventstech.db.entity.UserRole</class-a>
+        <class-b>com.eventstech.rest.dto.UserRoleDto</class-b>
     </mapping>
 
     <mapping>
-        <class-a>com.itut.db.entity.UserRole</class-a>
-        <class-b>com.itut.security.UserAuthority</class-b>
+        <class-a>com.eventstech.db.entity.UserRole</class-a>
+        <class-b>com.eventstech.security.UserAuthority</class-b>
         <field>
             <a>name</a>
             <b>authority</b>
@@ -24,8 +24,8 @@
     </mapping>
     
     <mapping>
-        <class-a>com.itut.db.entity.User</class-a>
-        <class-b>com.itut.security.UserPrincipal</class-b>
+        <class-a>com.eventstech.db.entity.User</class-a>
+        <class-b>com.eventstech.security.UserPrincipal</class-b>
         <field>
             <a>email</a>
             <b>username</b>

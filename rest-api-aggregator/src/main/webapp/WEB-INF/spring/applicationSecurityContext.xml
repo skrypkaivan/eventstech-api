@@ -15,7 +15,7 @@
     <beans:import resource="classpath*:spring/spring-db-context.xml"/>
     <beans:import resource="classpath*:spring/spring-security-context.xml"/>
 
-    <beans:bean id="authEntryPoint" class="com.itut.security.RestAuthenticationEntryPoint"/>
+    <beans:bean id="authEntryPoint" class="com.eventstech.security.RestAuthenticationEntryPoint"/>
 
     <http pattern="/**" entry-point-ref="authEntryPoint" use-expressions="true" auto-config="true" create-session="stateless">
         <custom-filter ref="requestHeaderAuthenticationFilter" position="PRE_AUTH_FILTER"/>
@@ -34,7 +34,7 @@
         <beans:property name="exceptionIfHeaderMissing" value="false"/>
     </beans:bean>
 
-    <beans:bean id="successHandler" class="com.itut.security.AuthenticationSuccessHandler">
+    <beans:bean id="successHandler" class="com.eventstech.security.AuthenticationSuccessHandler">
         <beans:property name="objectMapper" ref="objectMapper"/>
     </beans:bean>
 

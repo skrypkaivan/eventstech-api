@@ -24,8 +24,8 @@
     <Resource name="jdbc/mysqldb" auth="Container" type="javax.sql.DataSource"
               maxActive="10" maxIdle="30" maxWait="10000"
               username="root" password="qwertyaaa" driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/itut?useUnicode=true&amp;characterEncoding=UTF-8"/>
+              url="jdbc:mysql://localhost:3306/eventstech?useUnicode=true&amp;characterEncoding=UTF-8"/>
 
-    <Parameter name="itutConfig" value="/home/tomcat/conf" override="false"/>
+    <Parameter name="eventstechConfig" value="/home/tomcat/conf" override="false"/>
 </Context>
 
