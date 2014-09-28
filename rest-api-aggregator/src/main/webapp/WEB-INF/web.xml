@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app.xsd" version="3.0">
 
-    <display-name>itut</display-name>
+    <display-name>eventstech</display-name>
 
     <servlet>
         <servlet-name>spring</servlet-name>
