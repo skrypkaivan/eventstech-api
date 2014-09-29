@@ -5,7 +5,8 @@ import com.eventstech.rest.dto.SpeakerCategoryDto;
 import java.util.List;
 
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface SpeakerCategoryService {
 

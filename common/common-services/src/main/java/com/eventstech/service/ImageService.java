@@ -4,9 +4,8 @@ import com.eventstech.rest.dto.ImageUploadingDto;
 import com.eventstech.service.exception.ImageUploadingException;
 
 /**
- * Date: 20.08.14
  * Author: Ivan Skrypka
- * Copyright © 2014 Statiq, Inc.
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface ImageService {
     String uploadImage(ImageUploadingDto imageUploadingDto) throws ImageUploadingException;

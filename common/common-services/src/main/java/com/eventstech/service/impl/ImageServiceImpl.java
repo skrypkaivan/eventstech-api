@@ -1,13 +1,12 @@
 package com.eventstech.service.impl;
 
-import com.google.common.base.Joiner;
 import com.eventstech.rest.dto.ImageUploadingDto;
 import com.eventstech.service.ImageService;
 import com.eventstech.service.exception.ImageUploadingException;
+import com.google.common.base.Joiner;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -18,13 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Date: 20.08.14
  * Author: Ivan Skrypka
- * Copyright © 2014 Statiq, Inc.
+ * Copyright © 2014 Eventstech.com.ua.
  */
+@Slf4j
 public class ImageServiceImpl implements ImageService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
     private Map<ImageUploadingDto.Type, String> imageType2UploadingFolder = new HashMap<>();
     private Map<ImageUploadingDto.Type, String> imageType2Url = new HashMap<>();
 
@@ -38,7 +36,7 @@ public class ImageServiceImpl implements ImageService {
             ImageIO.write(src, extension, getImageDestination(imageName, folderToUpload));
             return Joiner.on("/").join(Arrays.asList(imageType2Url.get(imageUploadingDto.getType()), imageName));
         } catch (IOException e) {
-            LOG.error("Error during image uploading. Image name = {}", imageName);
+            log.error("Error during image uploading. Image name = {}", imageName);
             throw new ImageUploadingException(String.format("Error during image uploading. Image name = %s", imageName), e);
         }
     }

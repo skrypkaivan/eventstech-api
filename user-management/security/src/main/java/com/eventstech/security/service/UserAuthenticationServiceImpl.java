@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * Created by vanish on 8/9/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class UserAuthenticationServiceImpl implements UserAuthenticationService {
 

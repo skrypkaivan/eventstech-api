@@ -4,7 +4,8 @@ import com.eventstech.search.entity.SpeakerDocument;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
- * Created by vanish on 8/23/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface SpeakerSearchRepository extends ElasticsearchRepository<SpeakerDocument, Long> {
 }

@@ -1,9 +1,13 @@
 package com.eventstech.db.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 @Entity
 @Table(name = SpeakerCategory.TABLE_NAME, uniqueConstraints = {
@@ -18,35 +22,11 @@ public class SpeakerCategory {
 
     @Id
     @GeneratedValue
-    private Long id;
+    @Getter @Setter private Long id;
 
     @Column(name = "speaker_category_name", nullable = false, length = NAME_LENGTH)
-    private String name;
+    @Getter @Setter private String name;
 
     @Column(name = "slug", nullable = false, length = SLUG_LENGTH)
-    private String slug;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+    @Getter @Setter private String slug;
 }

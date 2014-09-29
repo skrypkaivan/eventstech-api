@@ -1,9 +1,8 @@
 package com.eventstech.service.exception;
 
 /**
- * Date: 20.08.14
  * Author: Ivan Skrypka
- * Copyright © 2014 Statiq, Inc.
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class ImageUploadingException extends Exception {
 

@@ -10,7 +10,8 @@ import org.springframework.security.core.token.Token;
 import org.springframework.security.core.token.TokenService;
 
 /**
- * Created by vanish on 8/8/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class LoginPasswordAuthenticationProvider implements AuthenticationProvider {
 

@@ -1,8 +1,7 @@
 package com.eventstech.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -13,11 +12,11 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedCredentialsNotFoundException;
 
 /**
- * Created by vanish on 8/18/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
+@Slf4j
 public class PreAuthenticatedTokenAuthenticationProvider implements AuthenticationProvider {
-
-    private static final Logger LOG = LoggerFactory.getLogger(PreAuthenticatedTokenAuthenticationProvider.class);
 
     private TokenService tokenService;
     private UserPrincipalService userPrincipalService;
@@ -30,7 +29,7 @@ public class PreAuthenticatedTokenAuthenticationProvider implements Authenticati
         try {
             token = tokenService.verifyToken(authentication.getCredentials().toString());
         } catch (Exception e) {
-            LOG.error("Error during token verification for user {}", principal);
+            log.error("Error during token verification for user {}", principal);
             throw new PreAuthenticatedCredentialsNotFoundException(String.format("Error during token verification for user %s", principal), e);
         }
         if (isTokenExpired(token)) {

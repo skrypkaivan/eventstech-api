@@ -5,7 +5,8 @@ import com.eventstech.rest.dto.ImageUploadingDto;
 import java.beans.PropertyEditorSupport;
 
 /**
- * Created by vanish on 8/21/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class ImageUploadingTypePropertyEditor extends PropertyEditorSupport {
 

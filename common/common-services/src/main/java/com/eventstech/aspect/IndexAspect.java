@@ -3,6 +3,7 @@ package com.eventstech.aspect;
 import com.eventstech.annotation.DeleteIndex;
 import com.eventstech.annotation.Indexed;
 import com.eventstech.annotation.IndexedEntityType;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -10,8 +11,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.dozer.DozerBeanMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -24,12 +23,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * Created by vanish on 8/23/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 @Aspect
+@Slf4j
 public class IndexAspect implements ApplicationContextAware {
-
-    private static final Logger LOG = LoggerFactory.getLogger(IndexAspect.class);
 
     private ApplicationContext appContext;
     private DozerBeanMapper dozer;
@@ -83,7 +82,7 @@ public class IndexAspect implements ApplicationContextAware {
                 return args[i];
             }
         }
-        LOG.error("Field with name {} is not defined for method {}", fieldName, method.getName());
+        log.error("Field with name {} is not defined for method {}", fieldName, method.getName());
         throw new IllegalArgumentException(String.format("Field with name %s is not defined for method %s", fieldName, method.getName()));
     }
 

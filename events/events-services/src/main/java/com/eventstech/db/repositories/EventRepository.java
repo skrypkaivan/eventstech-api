@@ -7,9 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
- * Date: 31.07.14
  * Author: Ivan Skrypka
- * Copyright © 2014 Statiq, Inc.
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface EventRepository extends JpaRepository<Event, Long> {
     Event getBySlug(String slug);

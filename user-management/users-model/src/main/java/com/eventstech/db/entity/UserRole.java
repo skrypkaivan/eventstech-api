@@ -1,9 +1,13 @@
 package com.eventstech.db.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
- * Created by vanish on 8/8/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 @Entity
 @Table(name = UserRole.TABLE_NAME)
@@ -13,24 +17,8 @@ public class UserRole {
 
     @Id
     @GeneratedValue
-    private Long id;
+    @Getter @Setter private Long id;
 
     @Column(name = "name", nullable = false)
-    private String name;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Getter @Setter private String name;
 }

@@ -8,7 +8,8 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by vanish on 8/8/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class UserPrincipalServiceImpl implements UserPrincipalService {
 

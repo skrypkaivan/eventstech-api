@@ -1,34 +1,14 @@
 package com.eventstech.search.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * Created by vanish on 8/23/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class EventSpeakerDocument {
-    private Long id;
-    private String name;
-    private String slug;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+    @Getter @Setter private Long id;
+    @Getter @Setter private String name;
+    @Getter @Setter private String slug;
 }

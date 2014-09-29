@@ -1,30 +1,15 @@
 package com.eventstech.rest.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
+@AllArgsConstructor
 public class FieldError {
-    private String field;
-    private String message;
-
-    public FieldError(String field, String message) {
-        this.field = field;
-        this.message = message;
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    @Getter @Setter private String field;
+    @Getter @Setter private String message;
 }

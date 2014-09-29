@@ -1,7 +1,8 @@
 package com.eventstech.security;
 
 /**
- * Created by vanish on 8/8/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface UserPrincipalService {
     UserPrincipal findActiveByUsernameAndPassword(String username, String password);

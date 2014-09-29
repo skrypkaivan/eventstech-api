@@ -4,7 +4,8 @@ import com.eventstech.search.entity.EventDocument;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
- * Created by vanish on 8/23/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface EventSearchRepository extends ElasticsearchRepository<EventDocument, Long> {
 }

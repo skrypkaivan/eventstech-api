@@ -4,7 +4,8 @@ import com.eventstech.db.entity.SpeakerCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface SpeakerCategoryRepository extends JpaRepository<SpeakerCategory, Long> {
 }

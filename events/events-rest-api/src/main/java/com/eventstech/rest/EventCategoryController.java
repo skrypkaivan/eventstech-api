@@ -17,7 +17,8 @@ import com.eventstech.security.UserAuthentication;
 import java.util.List;
 
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 @RestController
 @RequestMapping(value = "/events_tag",

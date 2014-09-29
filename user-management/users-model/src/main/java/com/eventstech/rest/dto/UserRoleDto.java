@@ -1,25 +1,13 @@
 package com.eventstech.rest.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * Created by vanish on 8/9/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class UserRoleDto {
-    private Long id;
-    private String name;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Getter @Setter private Long id;
+    @Getter @Setter private String name;
 }

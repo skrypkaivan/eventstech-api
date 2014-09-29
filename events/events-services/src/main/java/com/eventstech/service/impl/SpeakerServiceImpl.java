@@ -18,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by vanish on 7/31/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class SpeakerServiceImpl implements SpeakerService {
 

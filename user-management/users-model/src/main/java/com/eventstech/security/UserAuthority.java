@@ -1,9 +1,12 @@
 package com.eventstech.security;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * Created by vanish on 8/8/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class UserAuthority implements GrantedAuthority {
 
@@ -12,14 +15,7 @@ public class UserAuthority implements GrantedAuthority {
     public static final String ROLE_MANAGER = "ROLE_MANAGER";
     public static final String ROLE_USER = "ROLE_USER";
 
+    @Getter
+    @Setter
     private String authority;
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
-
-    @Override
-    public String getAuthority() {
-        return authority;
-    }
 }

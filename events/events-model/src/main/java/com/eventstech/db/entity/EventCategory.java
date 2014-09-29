@@ -1,11 +1,13 @@
 package com.eventstech.db.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
- * Date: 31.07.14
  * Author: Ivan Skrypka
- * Copyright © 2014 Statiq, Inc.
+ * Copyright © 2014 Eventstech.com.ua.
  */
 @Entity
 @Table(name = EventCategory.TABLE_NAME, uniqueConstraints = {
@@ -19,35 +21,11 @@ public class EventCategory {
 
     @Id
     @GeneratedValue
-    private Long id;
+    @Getter @Setter private Long id;
 
     @Column(name = "event_category_name", nullable = false, length = NAME_LENGTH)
-    private String name;
+    @Getter @Setter private String name;
 
     @Column(name = "slug", nullable = false, length = SLUG_LENGTH)
-    private String slug;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+    @Getter @Setter private String slug;
 }

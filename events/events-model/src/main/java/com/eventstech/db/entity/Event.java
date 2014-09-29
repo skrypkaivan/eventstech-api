@@ -1,6 +1,8 @@
 package com.eventstech.db.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -8,9 +10,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- * Date: 31.07.14
  * Author: Ivan Skrypka
- * Copyright © 2014 Statiq, Inc.
+ * Copyright © 2014 Eventstech.com.ua.
  */
 @Entity
 @Table(name = Event.TABLE_NAME, uniqueConstraints = {
@@ -28,7 +29,7 @@ public class Event {
 
     @Id
     @GeneratedValue
-    private Long id;
+    @Getter @Setter private Long id;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "event_spearks",
@@ -39,7 +40,7 @@ public class Event {
                     @JoinColumn(name = "speaker_id")
             }
     )
-    private Set<Speaker> speakers;
+    @Getter @Setter private Set<Speaker> speakers;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "event_categories",
@@ -50,174 +51,46 @@ public class Event {
                     @JoinColumn(name = "event_category_id")
             }
     )
-    private Set<EventCategory> categories;
+    @Getter @Setter private Set<EventCategory> categories;
 
     @Column(name = "start_date", nullable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime startDate;
+    @Getter @Setter private DateTime startDate;
 
     @Column(name = "end_date", nullable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime endDate;
+    @Getter @Setter private DateTime endDate;
 
     @Column(name = "logo", nullable = false)
-    private String logo;
+    @Getter @Setter private String logo;
 
     @Column(name = "full_name", nullable = false)
-    private String fullName;
+    @Getter @Setter private String fullName;
 
     @Column(name = "short_name", nullable = false)
-    private String shortName;
+    @Getter @Setter private String shortName;
 
     @Column(name = "city", nullable = false)
-    private String city;
+    @Getter @Setter private String city;
 
     @Column(name = "place", nullable = false)
-    private String place;
+    @Getter @Setter private String place;
 
     @Column(name = "popular")
-    private boolean popular;
+    @Getter @Setter private boolean popular;
 
     @Column(name = "short_desc", nullable = false, columnDefinition = "TEXT")
-    private String shortDescription;
+    @Getter @Setter private String shortDescription;
 
     @Column(name = "long_desc", nullable = false, columnDefinition = "TEXT")
-    private String longDescription;
+    @Getter @Setter private String longDescription;
 
     @Column(name = "slug", nullable = false)
-    private String slug;
+    @Getter @Setter private String slug;
 
     @Column(name = "pre_moderate")
-    private boolean preModerate;
+    @Getter @Setter private boolean preModerate;
 
     @ManyToOne(optional = false)
-    private User creator;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Set<Speaker> getSpeakers() {
-        return speakers;
-    }
-
-    public void setSpeakers(Set<Speaker> speakers) {
-        this.speakers = speakers;
-    }
-
-    public Set<EventCategory> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<EventCategory> categories) {
-        this.categories = categories;
-    }
-
-    public DateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(DateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public DateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(DateTime endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public boolean isPopular() {
-        return popular;
-    }
-
-    public void setPopular(boolean popular) {
-        this.popular = popular;
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public String getLongDescription() {
-        return longDescription;
-    }
-
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
-
-    public boolean isPreModerate() {
-        return preModerate;
-    }
-
-    public void setPreModerate(boolean preModerate) {
-        this.preModerate = preModerate;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
+    @Getter @Setter private User creator;
 }

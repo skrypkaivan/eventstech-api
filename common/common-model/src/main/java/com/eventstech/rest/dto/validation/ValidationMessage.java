@@ -1,7 +1,8 @@
 package com.eventstech.rest.dto.validation;
 
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public abstract class ValidationMessage {
     public static final String NOT_NULL = "not_null";

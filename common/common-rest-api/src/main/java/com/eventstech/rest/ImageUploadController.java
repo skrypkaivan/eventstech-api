@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
- * Created by vanish on 8/21/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 @RestController
 public class ImageUploadController {

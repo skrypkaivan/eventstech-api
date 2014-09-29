@@ -1,20 +1,15 @@
 package com.eventstech.security;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * Created by vanish on 8/18/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
+@AllArgsConstructor
 public class UserAuthenticationDetails {
+    @Getter @Setter
     private String authToken;
-
-    public UserAuthenticationDetails(String authToken) {
-        this.authToken = authToken;
-    }
-
-    public String getAuthToken() {
-        return authToken;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
 }

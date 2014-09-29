@@ -19,9 +19,8 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import java.util.List;
 
 /**
- * Date: 27.08.14
  * Author: Ivan Skrypka
- * Copyright © 2014 Statiq, Inc.
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class EventSearchServiceImpl implements EventSearchService {
 

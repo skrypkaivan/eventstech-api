@@ -1,15 +1,19 @@
 package com.eventstech.security;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
 /**
- * Created by vanish on 8/9/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class UserAuthentication extends UsernamePasswordAuthenticationToken {
 
+    @Getter @Setter
     private Long id;
 
     public UserAuthentication(Long id,
@@ -28,13 +32,5 @@ public class UserAuthentication extends UsernamePasswordAuthenticationToken {
 
     public String getPassword() {
         return getCredentials().toString();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

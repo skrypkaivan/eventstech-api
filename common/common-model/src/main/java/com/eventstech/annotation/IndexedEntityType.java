@@ -1,7 +1,8 @@
 package com.eventstech.annotation;
 
 /**
- * Created by vanish on 8/23/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public enum IndexedEntityType {
     METHOD_PARAM,

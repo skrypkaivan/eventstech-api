@@ -5,7 +5,8 @@ import com.eventstech.rest.dto.EventCategoryDto;
 import java.util.List;
 
 /**
- * Created by vanish on 8/24/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface EventCategorySearchService {
 

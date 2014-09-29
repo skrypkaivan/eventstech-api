@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by vanish on 8/7/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 

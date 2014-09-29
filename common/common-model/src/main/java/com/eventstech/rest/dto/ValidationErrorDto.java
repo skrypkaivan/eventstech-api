@@ -5,7 +5,8 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public class ValidationErrorDto {
     private List<FieldError> fieldErrors = Lists.newLinkedList();

@@ -4,7 +4,8 @@ import com.eventstech.db.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by vanish on 8/8/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface UserRepository extends JpaRepository<User, Long> {
     User findActiveByEmailAndPassword(String email, String password);

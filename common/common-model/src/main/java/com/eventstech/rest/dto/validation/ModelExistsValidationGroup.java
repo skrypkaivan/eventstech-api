@@ -1,7 +1,8 @@
 package com.eventstech.rest.dto.validation;
 
 /**
- * Created by vanish on 8/6/14.
+ * Author: Ivan Skrypka
+ * Copyright © 2014 Eventstech.com.ua.
  */
 public interface ModelExistsValidationGroup {
 }
