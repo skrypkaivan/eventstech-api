@@ -15,4 +15,10 @@ dependencies {
     compile project(":user-management:security")
 }
 
-war.archiveName  = 'eventstech.war'
+war {
+    archiveName = "eventstech"
+
+    into ('api-doc') {
+        from '../api-doc'
+    }
+}

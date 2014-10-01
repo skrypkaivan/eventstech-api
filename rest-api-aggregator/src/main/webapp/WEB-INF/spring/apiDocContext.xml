@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.mangofactory.swagger.controllers"/>
+    <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
+
+    <bean id="jacksonScalaSupport" class="com.mangofactory.swagger.configuration.JacksonScalaSupport">
+        <property name="registerScalaModule" value="true"/>
+    </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref bean="defaultIgnorableParameterTypes"/>
+        </property>
+        <property name="targetMethod">
+            <value>addAll</value>
+        </property>
+        <property name="arguments">
+            <set>
+                <value>com.eventstech.security.UserAuthentication</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="swaggerGlobalSettings" class="com.mangofactory.swagger.configuration.SwaggerGlobalSettings">
+        <property name="globalResponseMessages" value="#{springSwaggerConfig.defaultResponseMessages()}"/>
+        <property name="ignorableParameterTypes" value="#{springSwaggerConfig.defaultIgnorableParameterTypes()}"/>
+        <property name="alternateTypeProvider" value="#{springSwaggerConfig.defaultAlternateTypeProvider()}"/>
+    </bean>
+
+    <bean id="swaggerApiResourceListing" class="com.mangofactory.swagger.core.SwaggerApiResourceListing">
+        <constructor-arg value="#{springSwaggerConfig.swaggerCache()}"/>
+        <constructor-arg value="web-api"/>
+        <property name="swaggerGlobalSettings" ref="swaggerGlobalSettings"/>
+        <property name="swaggerPathProvider" ref="swaggerPathProvider"/>
+        <property name="apiListingReferenceScanner" ref="apiListingReferenceScanner"/>
+    </bean>
+
+    <bean id="swaggerPathProvider" class="com.eventstech.swagger.EventsTechPathProvider"/>
+
+    <bean id="apiListingReferenceScanner" class="com.mangofactory.swagger.scanners.ApiListingReferenceScanner">
+        <property name="requestMappingHandlerMapping"
+                  value="#{springSwaggerConfig.swaggerRequestMappingHandlerMappings()}"/>
+        <property name="excludeAnnotations" value="#{springSwaggerConfig.defaultExcludeAnnotations()}"/>
+        <property name="resourceGroupingStrategy" value="#{springSwaggerConfig.defaultResourceGroupingStrategy()}"/>
+        <property name="swaggerPathProvider" ref="swaggerPathProvider"/>
+        <property name="swaggerGroup" value="web-api"/>
+    </bean>
+</beans>
