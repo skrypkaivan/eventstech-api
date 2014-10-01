@@ -16,7 +16,7 @@ dependencies {
 }
 
 war {
-    archiveName = "eventstech"
+    archiveName = "eventstech.war"
 
     into ('api-doc') {
         from '../api-doc'
