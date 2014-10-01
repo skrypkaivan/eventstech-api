@@ -10,6 +10,6 @@ import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
 public class EventsTechPathProvider extends DefaultSwaggerPathProvider {
     @Override
     public String getAppBasePath() {
-        return "/eventstech/app";
+        return "/api";
     }
 }
