@@ -8,8 +8,15 @@ import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
  * Copyright © 2014 Statiq, Inc.
  */
 public class EventsTechPathProvider extends DefaultSwaggerPathProvider {
+
+    private String path;
+
     @Override
     public String getAppBasePath() {
-        return "/";
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

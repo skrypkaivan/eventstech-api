@@ -9,6 +9,7 @@
 
     <context:component-scan base-package="com.mangofactory.swagger.controllers"/>
     <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
+    <context:property-placeholder location="file:${eventstechConfig}/eventstech.properties"/>
 
     <bean id="jacksonScalaSupport" class="com.mangofactory.swagger.configuration.JacksonScalaSupport">
         <property name="registerScalaModule" value="true"/>
@@ -44,7 +45,9 @@
         <property name="apiListingReferenceScanner" ref="apiListingReferenceScanner"/>
     </bean>
 
-    <bean id="swaggerPathProvider" class="com.eventstech.swagger.EventsTechPathProvider"/>
+    <bean id="swaggerPathProvider" class="com.eventstech.swagger.EventsTechPathProvider">
+        <property name="path" value="${api-doc.path}"/>
+    </bean>
 
     <bean id="apiListingReferenceScanner" class="com.mangofactory.swagger.scanners.ApiListingReferenceScanner">
         <property name="requestMappingHandlerMapping"
