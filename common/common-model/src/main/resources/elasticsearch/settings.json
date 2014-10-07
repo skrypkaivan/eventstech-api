@@ -4,7 +4,10 @@
             "itut_ngram_analyzer": {
                 "type": "custom",
                 "tokenizer": "itut_ngram_tokernizer",
-                "filter": "lowercase"
+                "filter": "lowercase",
+                "char_filter" : [
+                    "html_strip"
+                ]
             }
         },
         "tokenizer": {
