@@ -1,0 +1,24 @@
+apply plugin: 'idea'
+
+idea {
+    module {
+        name = 'search-index-creator'
+    }
+}
+
+dependencies {
+    compile project(':events:events-model')
+    compile project(':events:events-services')
+}
+
+jar {
+    manifest.attributes("Manifest-Version": "1.0", "Main-Class": "com.eventstech.searchindex.SearchIndexCreator")
+
+    into ('conf') {
+        from '../../conf/prod/properties'
+        include 'db.properties'
+        include 'elasticsearch.properties'
+    }
+
+    archiveName = 'search-index-creator-' + project.version + '.jar'
+}
