@@ -12,7 +12,9 @@ public interface SpeakerCategoryService {
 
     SpeakerCategoryDto save(SpeakerCategoryDto speakerCategoryDto);
 
-    List<SpeakerCategoryDto> findAll();
+    List<SpeakerCategoryDto> getSubCategories(Long categoryId);
+
+    List<SpeakerCategoryDto> findTopLevel();
 
     void delete(Long speakerCategoryId);
 }

@@ -34,8 +34,19 @@ public class SpeakerCategoryServiceImpl implements SpeakerCategoryService {
 
     @Transactional
     @Override
-    public List<SpeakerCategoryDto> findAll() {
-        return Lists.transform(speakerCategoryRepository.findAll(), new Function<SpeakerCategory, SpeakerCategoryDto>() {
+    public List<SpeakerCategoryDto> getSubCategories(Long categoryId) {
+        return Lists.transform(speakerCategoryRepository.getSubCategories(categoryId), new Function<SpeakerCategory, SpeakerCategoryDto>() {
+            @Override
+            public SpeakerCategoryDto apply(SpeakerCategory input) {
+                return dozer.map(input, SpeakerCategoryDto.class);
+            }
+        });
+    }
+
+    @Transactional
+    @Override
+    public List<SpeakerCategoryDto> findTopLevel() {
+        return Lists.transform(speakerCategoryRepository.findAllTopLevel(), new Function<SpeakerCategory, SpeakerCategoryDto>() {
             @Override
             public SpeakerCategoryDto apply(SpeakerCategory input) {
                 return dozer.map(input, SpeakerCategoryDto.class);

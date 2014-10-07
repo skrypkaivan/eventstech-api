@@ -13,6 +13,10 @@ import javax.persistence.*;
 @Table(name = EventCategory.TABLE_NAME, uniqueConstraints = {
         @UniqueConstraint(name = "event_category_slug_unique", columnNames = {"slug"})
 })
+@NamedQueries(value = {
+    @NamedQuery(name = "EventCategory.findAllTopLevel", query = "select ec from EventCategory ec where ec.parentCategoryId is null"),
+    @NamedQuery(name = "EventCategory.getSubCategories", query = "select ec from EventCategory ec where ec.parentCategoryId = ?1")
+})
 public class EventCategory {
     public static final String TABLE_NAME = "event_category";
 
@@ -28,4 +32,8 @@ public class EventCategory {
 
     @Column(name = "slug", nullable = false, length = SLUG_LENGTH)
     @Getter @Setter private String slug;
+
+    @Column(name = "parent_id")
+    @Getter @Setter
+    private Long parentCategoryId;
 }

@@ -2,6 +2,7 @@ package com.eventstech.rest;
 
 import com.eventstech.rest.dto.EventCategoryDto;
 import com.eventstech.rest.dto.validation.ModelExistsValidationGroup;
+import com.eventstech.security.UserAuthentication;
 import com.eventstech.service.EventCategoryService;
 import com.eventstech.service.search.EventCategorySearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.eventstech.security.UserAuthentication;
 
 import java.util.List;
 
@@ -46,8 +46,13 @@ public class EventCategoryController {
     }
 
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE)
-    public ResponseEntity<List<EventCategoryDto>> list() {
-        return new ResponseEntity<>(eventCategoryService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<EventCategoryDto>> getTopLevelCategories() {
+        return new ResponseEntity<>(eventCategoryService.findTopLevel(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/{categoryId}/subcategories")
+    public ResponseEntity<List<EventCategoryDto>> subCategories(@PathVariable("categoryId") Long categoryId) {
+        return new ResponseEntity<>(eventCategoryService.getSubCategories(categoryId), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

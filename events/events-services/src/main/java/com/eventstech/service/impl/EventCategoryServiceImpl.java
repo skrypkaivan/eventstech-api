@@ -35,8 +35,19 @@ public class EventCategoryServiceImpl implements EventCategoryService {
 
     @Transactional
     @Override
-    public List<EventCategoryDto> findAll() {
-        return Lists.transform(eventCategoryRepository.findAll(), new Function<EventCategory, EventCategoryDto>() {
+    public List<EventCategoryDto> getSubCategories(Long categoryId) {
+        return Lists.transform(eventCategoryRepository.getSubCategories(categoryId), new Function<EventCategory, EventCategoryDto>() {
+            @Override
+            public EventCategoryDto apply(EventCategory input) {
+                return dozer.map(input, EventCategoryDto.class);
+            }
+        });
+    }
+
+    @Transactional
+    @Override
+    public List<EventCategoryDto> findTopLevel() {
+        return Lists.transform(eventCategoryRepository.findAllTopLevel(), new Function<EventCategory, EventCategoryDto>() {
             @Override
             public EventCategoryDto apply(EventCategory input) {
                 return dozer.map(input, EventCategoryDto.class);

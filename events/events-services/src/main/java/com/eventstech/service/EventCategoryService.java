@@ -12,7 +12,9 @@ public interface EventCategoryService {
 
     EventCategoryDto save(EventCategoryDto eventCategoryDto);
 
-    List<EventCategoryDto> findAll();
+    List<EventCategoryDto> getSubCategories(Long categoryId);
+
+    List<EventCategoryDto> findTopLevel();
 
     void delete(Long eventCategoryId);
 }

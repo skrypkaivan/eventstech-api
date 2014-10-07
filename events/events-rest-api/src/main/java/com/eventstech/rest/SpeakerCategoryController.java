@@ -44,8 +44,13 @@ public class SpeakerCategoryController {
     }
 
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE)
-    public ResponseEntity<List<SpeakerCategoryDto>> list() {
-        return new ResponseEntity<>(speakerCategoryService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<SpeakerCategoryDto>> getTopLevelCategories() {
+        return new ResponseEntity<>(speakerCategoryService.findTopLevel(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "{categoryId}/subcategories")
+    public ResponseEntity<List<SpeakerCategoryDto>> getSubCategories(@PathVariable("categoryId") Long categoryId) {
+        return new ResponseEntity<>(speakerCategoryService.getSubCategories(categoryId), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

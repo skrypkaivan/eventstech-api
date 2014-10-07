@@ -50,7 +50,7 @@ public class EventCategoryServiceImplTest extends AbstractDbTest {
         eventCategoryTwo.setSlug("event1");
         eventCategoryRepository.save(Arrays.asList(eventCategoryOne, eventCategoryTwo));
 
-        Assert.assertThat(eventCategoryService.findAll().size(), equalTo(2));
+        Assert.assertThat(eventCategoryService.getSubCategories().size(), equalTo(2));
     }
 
     @Test
