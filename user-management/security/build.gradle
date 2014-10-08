@@ -8,6 +8,7 @@ idea {
 }
 
 dependencies {
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: "${springSecurityVersion}"
     compile project(':user-management:users-model')
     compile project(':user-management:users-services')
 }

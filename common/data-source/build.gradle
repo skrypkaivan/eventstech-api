@@ -10,12 +10,9 @@ idea {
 }
 
 dependencies {
-    compile group: 'org.springframework', name: 'spring-context'
-    compile group: 'org.springframework', name: 'spring-jdbc'
-    compile group: 'org.springframework', name: 'spring-tx'
-    compile group: 'org.springframework', name: 'spring-orm'
-    compile group: 'org.springframework.data', name: 'spring-data-commons'
-    compile group: 'org.springframework.data', name: 'spring-data-jpa'
+    testCompile group: 'junit', name:'junit', version: "${junitVersion}"
+    testCompile group: 'org.springframework', name: 'spring-test', version: "${springFrameworkVersion}"
+    testCompile group: 'org.springframework', name: 'spring-tx', version: "${springFrameworkVersion}"
 }
 
 configurations {

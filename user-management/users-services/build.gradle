@@ -1,6 +1,11 @@
 apply plugin: 'idea'
 
 dependencies {
+    compile group: 'org.springframework.data', name: 'spring-data-commons', version: "${sprintFrameworkDataVersion}"
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: "${sprintFrameworkDataVersion}"
+    compile group: 'org.springframework', name: 'spring-orm', version: "${springFrameworkVersion}"
+    compile group: 'org.springframework', name: 'spring-jdbc', version: "${springFrameworkVersion}"
+    compile group: 'org.springframework', name: 'spring-aop', version: "${springFrameworkVersion}"
     compile project(':common:data-source')
     compile project(':user-management:users-model')
     compile project(':common:common-services')

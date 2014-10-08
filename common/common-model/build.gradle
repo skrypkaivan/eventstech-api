@@ -6,4 +6,12 @@ idea {
     }
 }
 
+dependencies {
+    compile group: 'org.springframework', name: 'spring-beans', version: "${springDataElasticsearchVersion}"
+    compile group: 'org.springframework.data', name:'spring-data-elasticsearch', version:"${springDataElasticsearchVersion}"
+    compile group: 'org.springframework', name: 'spring-web', version: "${springFrameworkVersion}"
+    compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
+    compile group: 'org.springframework.data', name: 'spring-data-commons', version: "${sprintFrameworkDataVersion}"
+}
+
 jar.archiveName = 'common-model-' + project.version + '.jar'

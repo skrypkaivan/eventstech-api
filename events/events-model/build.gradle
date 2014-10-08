@@ -8,6 +8,8 @@ idea {
 }
 
 dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: "${hibernateEntityManagerVersion}"
+    compile group: 'org.hibernate', name:'hibernate-validator', version:"${hibernateValidatorVersion}"
     compile project (':common:common-model')
     compile project (':user-management:users-model')
 }

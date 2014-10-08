@@ -1,8 +1,13 @@
 apply plugin: 'war'
 
 dependencies {
-    compile 'ch.qos.logback:logback-core'
-    compile 'ch.qos.logback:logback-classic'
+    provided group: 'javax.servlet',name:'servlet-api', version:"${javaxServletVersion}"
+    compile group: 'com.mangofactory', name:'swagger-springmvc', version: "${swaggerSpringMvcVersion}"
+    compile group: 'org.springframework', name: 'spring-webmvc', version: "${springFrameworkVersion}"
+    compile group: 'ch.qos.logback', name:'logback-core', version: "${logbackVersion}"
+    compile group: 'ch.qos.logback', name:'logback-classic', version:"${logbackVersion}"
+    compile group: "org.slf4j", name:"slf4j-api", version:"${slf4jVersion}"
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda', version:"${jacksonVersion}"
     compile project(":events:events-services")
     compile project(":common:data-source")
     compile project(":events:events-model")

@@ -1,6 +1,11 @@
 apply plugin: 'idea'
 
 dependencies {
+    compile group: 'net.sf.dozer', name: 'dozer', version: "${dozerVersion}"
+    compile group: 'net.sf.dozer', name:'dozer-spring', version: "${dozerVersion}"
+    compile group: 'org.apache.commons', name:'commons-lang3', version:"${commonsLang3Version}"
+    compile group: 'org.aspectj', name:'aspectjweaver', version:"${aspectjWeaverVersion}"
+    compile group: 'commons-io', name:'commons-io', version:"${commonsIOVersion}"
     compile project(":common:common-model")
 }
 
