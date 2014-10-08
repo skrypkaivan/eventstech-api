@@ -10,13 +10,18 @@ ssh -i conf/prod/deployment/eventstech-key.key ubuntu@${APPLICATION_SERVER_IP} '
     rm -r /home/ubuntu/tomcat/logs/*
     rm -f /home/ubuntu/tomcat/webapps/eventstech.war
     rm -r /home/ubuntu/conf/*
+    rm -rf /home/ubuntu/tools
+    mkdir /home/ubuntu/tools
 ENDSSH
 
-scp -r -i conf/prod/deployment/eventstech-key.pem ubuntu@${APPLICATION_SERVER_IP} conf/prod/properties/* ubuntu@${APPLICATION_SERVER_IP}:/home/ubuntu/conf
-scp -r -i conf/prod/deployment/eventstech-key.pem ubuntu@${APPLICATION_SERVER_IP} conf/prod/tomcat/context.xml ubuntu@${APPLICATION_SERVER_IP}:/home/ubuntu/tomcat/conf
-scp -r -i conf/prod/deployment/eventstech-key.pem ubuntu@${APPLICATION_SERVER_IP} rest-api-aggregator/build/libs/eventstech.war ubuntu@${APPLICATION_SERVER_IP}:/home/ubuntu/tomcat/webapps
+scp -r -i conf/prod/deployment/eventstech-key.pem conf/prod/properties/* ubuntu@${APPLICATION_SERVER_IP}:/home/ubuntu/conf
+scp -r -i conf/prod/deployment/eventstech-key.pem conf/prod/tomcat/context.xml ubuntu@${APPLICATION_SERVER_IP}:/home/ubuntu/tomcat/conf
+scp -r -i conf/prod/deployment/eventstech-key.pem tools/build/distributions/eventstech-tools.zip ubuntu@${APPLICATION_SERVER_IP}:/home/ubuntu/tools
+scp -r -i conf/prod/deployment/eventstech-key.pem rest-api-aggregator/build/libs/eventstech.war ubuntu@${APPLICATION_SERVER_IP}:/home/ubuntu/tomcat/webapps
 
 ssh -i conf/prod/deployment/eventstech-key.key ubuntu@${APPLICATION_SERVER_IP} 'bash -s' <<'ENDSSH'
+    unzip /home/ubuntu/tools/eventstech-tools.zip
+    rm /home/ubuntu/tooks/eventstech-tools.zip
     bash /home/ubuntu/tomcat/bin/startup.sh
 ENDSSH
 

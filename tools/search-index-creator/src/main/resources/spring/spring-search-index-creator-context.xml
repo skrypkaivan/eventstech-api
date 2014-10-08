@@ -8,12 +8,32 @@
     <context:property-placeholder location="classpath*:conf/db.properties" ignore-unresolvable="true"/>
     <context:property-placeholder location="classpath*:conf/elasticsearch.properties" ignore-unresolvable="true"/>
 
+    <import resource="classpath*:spring/spring-db-context.xml"/>
+
+    <import resource="classpath*:spring/spring-search-context.xml"/>
+
     <bean id="dozer" class="org.dozer.spring.DozerBeanMapperFactoryBean">
         <property name="mappingFiles" value="classpath*:dozer/*mappings.xml"/>
     </bean>
 
-    <import resource="classpath*:spring/spring-db-context.xml"/>
-    <import resource="classpath*:spring/spring-search-context.xml"/>
-
+    <bean id="searchIndexCreatorService" class="com.eventstech.searchindex.impl.SearchIndexCreatorServiceImpl">
+        <property name="dozer" ref="dozer"/>
+        <property name="repositoryToSearchDto">
+            <map key-type="org.springframework.data.jpa.repository.JpaRepository" value-type="java.lang.Class">
+                <entry key-ref="eventCategoryRepository" value="com.eventstech.search.entity.EventCategoryDocument"/>
+                <entry key-ref="eventRepository" value="com.eventstech.search.entity.EventDocument"/>
+                <entry key-ref="speakerCategoryRepository" value="com.eventstech.search.entity.SpeakerCategoryDocument"/>
+                <entry key-ref="speakerRepository" value="com.eventstech.search.entity.SpeakerDocument"/>
+            </map>
+        </property>
+        <property name="repositoryToSearchRepository">
+            <map key-type="org.springframework.data.jpa.repository.JpaRepository" value-type="org.springframework.data.elasticsearch.repository.ElasticsearchRepository">
+                <entry key-ref="eventCategoryRepository" value-ref="eventCategorySearchRepository"/>
+                <entry key-ref="eventRepository" value-ref="eventSearchRepository"/>
+                <entry key-ref="speakerCategoryRepository" value-ref="speakerCategorySearchRepository"/>
+                <entry key-ref="speakerRepository" value-ref="speakerSearchRepository"/>
+            </map>
+        </property>
+    </bean>
 
 </beans>

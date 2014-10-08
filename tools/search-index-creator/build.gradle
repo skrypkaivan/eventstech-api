@@ -12,7 +12,10 @@ dependencies {
 }
 
 jar {
-    manifest.attributes("Manifest-Version": "1.0", "Main-Class": "com.eventstech.searchindex.SearchIndexCreator")
+    manifest.attributes("Manifest-Version": "1.0",
+                        "Main-Class": "com.eventstech.searchindex.SearchIndexCreator",
+                        "Class-Path": "./*"
+    )
 
     into ('conf') {
         from '../../conf/prod/properties'

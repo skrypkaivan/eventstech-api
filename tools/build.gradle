@@ -1,0 +1,14 @@
+task copyToolsLibs(type: Copy) {
+    project.subprojects.each {
+        into "$buildDir/toolsBundleOutput"
+        from it.configurations.runtime
+        from "$it.buildDir/libs"
+    }
+}
+
+task createToolsBundle(type: Zip, dependsOn: copyToolsLibs) {
+    copyToolsLibs.outputs.files.each {
+        from it.getPath()
+    }
+    archiveName = "eventstech-tools.zip"
+}

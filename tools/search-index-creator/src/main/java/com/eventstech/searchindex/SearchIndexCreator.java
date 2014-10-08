@@ -20,6 +20,9 @@ public class SearchIndexCreator {
         context.refresh();
         context.registerShutdownHook();
 
+        SearchIndexCreatorService searchIndexCreatorService = context.getBean(SearchIndexCreatorService.class);
+        searchIndexCreatorService.create();
+
         log.info("***************** Search Index Creator Finished Work *****************");
     }
 }
