@@ -1,7 +1,7 @@
 task copyToolsLibs(type: Copy) {
     project.subprojects.each {
         into "$buildDir/toolsBundleOutput"
-        from it.configurations.runtime
+        from it.configurations.compile
         from "$it.buildDir/libs"
     }
 }

@@ -16,7 +16,7 @@ jar {
 
     def classPath = [];
 
-    configurations.runtime.each {
+    configurations.compile.each {
         classPath.add(it.name)
     }
 
