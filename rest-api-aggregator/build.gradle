@@ -1,6 +1,9 @@
 apply plugin: 'war'
 
 dependencies {
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: "${springSecurityVersion}"
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: "${springSecurityVersion}"
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: "${springSecurityVersion}"
     provided group: 'javax.servlet',name:'servlet-api', version:"${javaxServletVersion}"
     compile group: 'com.mangofactory', name:'swagger-springmvc', version: "${swaggerSpringMvcVersion}"
     compile group: 'org.springframework', name: 'spring-webmvc', version: "${springFrameworkVersion}"
@@ -22,6 +25,10 @@ dependencies {
 
 war {
     archiveName = "eventstech.war"
+
+    into ('WEB-INF/classes') {
+        from '../conf/prod/logging'
+    }
 
     into ('api-doc') {
         from '../api-doc'

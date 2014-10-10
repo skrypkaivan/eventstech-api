@@ -7,6 +7,7 @@ idea {
 }
 
 dependencies {
+    compile group: 'org.jadira.usertype', name: 'usertype.jodatime', version: "${jadiraJodaTimeVersion}"
     compile group: 'org.springframework', name: 'spring-beans', version: "${springDataElasticsearchVersion}"
     compile group: 'org.springframework.data', name:'spring-data-elasticsearch', version:"${springDataElasticsearchVersion}"
     compile group: 'org.springframework', name: 'spring-web', version: "${springFrameworkVersion}"

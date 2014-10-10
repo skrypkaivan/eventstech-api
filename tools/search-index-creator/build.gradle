@@ -23,5 +23,9 @@ jar {
         include 'elasticsearch.properties'
     }
 
+    into ('.') {
+        from '../conf/prod/logging'
+    }
+
     archiveName = 'search-index-creator-' + project.version + '.jar'
 }

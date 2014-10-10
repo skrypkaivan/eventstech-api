@@ -1,6 +1,7 @@
 apply plugin: 'idea'
 
 dependencies {
+    compile group: 'commons-fileupload', name:'commons-fileupload', version:"${commonsFileUploadVersion}"
     compile group: 'net.sf.dozer', name: 'dozer', version: "${dozerVersion}"
     compile group: 'net.sf.dozer', name:'dozer-spring', version: "${dozerVersion}"
     compile group: 'org.apache.commons', name:'commons-lang3', version:"${commonsLang3Version}"
