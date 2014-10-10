@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface EventSearchService {
     List<EventDto> findSimilar(EventDto event, int count);
+
+    List<EventDto> search(String searchQuery, int count, int pageNumber);
 }

@@ -120,6 +120,13 @@ public class EventController {
         return new ResponseEntity<>(eventSearchService.findSimilar(eventDto, count), HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.ALL_VALUE, value = "/search")
+    public ResponseEntity<List<EventDto>> search(@RequestParam("s") String searchQuery,
+                                                 @RequestParam(value = "page_num", defaultValue = DEFAULT_PAGE) int pageNumber,
+                                                 @RequestParam(value = "page_size", defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
+        return new ResponseEntity<>(eventSearchService.search(searchQuery, pageSize, pageNumber), HttpStatus.OK);
+    }
+
     private boolean hasRightsToModify(UserAuthentication user, Long eventId) {
         if (userAuthenticationService.checkRoles(user, ROLE_CONTENT, ROLE_ADMIN, ROLE_MANAGER)) {
             UserDto eventCreator = eventService.getEventCreator(eventId);

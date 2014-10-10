@@ -8,10 +8,7 @@ import com.eventstech.search.entity.EventDocument;
 import com.eventstech.search.repositories.EventSearchRepository;
 import com.eventstech.service.search.EventSearchService;
 import org.dozer.DozerBeanMapper;
-import org.elasticsearch.index.query.FilterBuilder;
-import org.elasticsearch.index.query.FilterBuilders;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.TermsQueryBuilder;
+import org.elasticsearch.index.query.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
@@ -35,6 +32,19 @@ public class EventSearchServiceImpl implements EventSearchService {
 
         SearchQuery searchQuery = new NativeSearchQuery(query, notCurrentEventFilter);
         searchQuery.setPageable(new PageRequest(0, count));
+
+        return transform(Lists.newArrayList(eventSearchRepository.search(searchQuery)));
+    }
+
+    @Override
+    public List<EventDto> search(String searchTerm, int count, int pageNumber) {
+        MultiMatchQueryBuilder multiMatchQueryBuilder =
+                QueryBuilders.multiMatchQuery(searchTerm, "name", "tags.slug", "longDescription");
+        multiMatchQueryBuilder.field("name", 6.0F);
+        multiMatchQueryBuilder.field("tags.slug", 3.0F);
+
+        SearchQuery searchQuery = new NativeSearchQuery(multiMatchQueryBuilder);
+        searchQuery.setPageable(new PageRequest(pageNumber - 1, count));
 
         return transform(Lists.newArrayList(eventSearchRepository.search(searchQuery)));
     }
