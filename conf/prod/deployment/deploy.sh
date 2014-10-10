@@ -13,10 +13,10 @@ ssh -i conf/prod/deployment/eventstech-key.key ${SYSTEM_USERNAME}@${APPLICATION_
     mkdir ${APPLICATION_HOME}/tools
 ENDSSH
 
-scp -r -i conf/prod/deployment/eventstech-key.pem conf/prod/properties/* ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/conf
-scp -r -i conf/prod/deployment/eventstech-key.pem conf/prod/tomcat/context.xml ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/tomcat/conf
-scp -r -i conf/prod/deployment/eventstech-key.pem tools/build/distributions/eventstech-tools.zip ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/tools
-scp -r -i conf/prod/deployment/eventstech-key.pem rest-api-aggregator/build/libs/eventstech.war ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/tomcat/webapps
+scp -r -i conf/prod/deployment/eventstech-key.key conf/prod/properties/* ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/conf
+scp -r -i conf/prod/deployment/eventstech-key.key conf/prod/tomcat/context.xml ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/tomcat/conf
+scp -r -i conf/prod/deployment/eventstech-key.key tools/build/distributions/eventstech-tools.zip ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/tools
+scp -r -i conf/prod/deployment/eventstech-key.key rest-api-aggregator/build/libs/eventstech.war ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:${APPLICATION_HOME}/tomcat/webapps
 
 ssh -i conf/prod/deployment/eventstech-key.key ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP} 'bash -s' <<'ENDSSH'
     unzip ${APPLICATION_HOME}/tools/eventstech-tools.zip
