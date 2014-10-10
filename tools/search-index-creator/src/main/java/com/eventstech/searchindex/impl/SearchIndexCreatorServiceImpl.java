@@ -2,6 +2,7 @@ package com.eventstech.searchindex.impl;
 
 import com.eventstech.searchindex.SearchIndexCreatorService;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.dozer.DozerBeanMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -15,6 +16,7 @@ import java.util.Map;
  * Author: Ivan Skrypka
  * Copyright © 2014 Statiq, Inc.
  */
+@Slf4j
 public class SearchIndexCreatorServiceImpl implements SearchIndexCreatorService {
 
     private static final int CHUNK_SIZE = 100;
@@ -28,6 +30,7 @@ public class SearchIndexCreatorServiceImpl implements SearchIndexCreatorService 
     public void create() {
         clearIndexes();
         for (JpaRepository<?, ?> jpaRepository : repositoryToSearchDto.keySet()) {
+            log.info("Repository {} is processing", jpaRepository.getClass().getName());
             List<?> entities;
             int pageNumber = 0;
             do {
@@ -39,6 +42,7 @@ public class SearchIndexCreatorServiceImpl implements SearchIndexCreatorService 
                     }
                     ElasticsearchRepository elasticSearchRepository = repositoryToSearchRepository.get(jpaRepository);
                     elasticSearchRepository.save(searchDocuments);
+                    log.info("Search documents for repository {} is processed", elasticSearchRepository.getClass().getName());
                 }
             } while (!entities.isEmpty());
         }

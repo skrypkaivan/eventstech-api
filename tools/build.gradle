@@ -12,3 +12,10 @@ task createToolsBundle(type: Zip, dependsOn: copyToolsLibs) {
     }
     archiveName = "eventstech-tools.zip"
 }
+
+subprojects {
+    dependencies {
+        compile group: 'ch.qos.logback', name:'logback-core', version: "${logbackVersion}"
+        compile group: 'ch.qos.logback', name:'logback-classic', version:"${logbackVersion}"
+    }
+}

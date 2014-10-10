@@ -12,9 +12,17 @@ dependencies {
 }
 
 jar {
+    archiveName = 'search-index-creator-' + project.version + '.jar'
+
+    def classPath = [];
+
+    configurations.runtime.each {
+        classPath.add(it.name)
+    }
+
     manifest.attributes("Manifest-Version": "1.0",
                         "Main-Class": "com.eventstech.searchindex.SearchIndexCreator",
-                        "Class-Path": "./*"
+                        "Class-Path": classPath.join(" ")
     )
 
     into ('conf') {
@@ -23,9 +31,7 @@ jar {
         include 'elasticsearch.properties'
     }
 
-    into ('.') {
-        from '../conf/prod/logging'
+    into (".") {
+        from '../../conf/prod/logging'
     }
-
-    archiveName = 'search-index-creator-' + project.version + '.jar'
 }
