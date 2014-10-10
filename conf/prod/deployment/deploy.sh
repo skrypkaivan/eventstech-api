@@ -19,7 +19,7 @@ scp -r -i conf/prod/deployment/eventstech-key.key tools/build/distributions/even
 scp -r -i conf/prod/deployment/eventstech-key.key rest-api-aggregator/build/libs/eventstech.war ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP}:/home/ubuntu/tomcat/webapps
 
 ssh -i conf/prod/deployment/eventstech-key.key ${SYSTEM_USERNAME}@${APPLICATION_SERVER_IP} 'bash -s' <<'ENDSSH'
-    unzip /home/ubuntu/tools/eventstech-tools.zip
+    unzip /home/ubuntu/tools/eventstech-tools.zip -d /home/ubuntu/tools
     rm -f /home/ubuntu/tools/eventstech-tools.zip
     bash /home/ubuntu/tomcat/bin/startup.sh
 ENDSSH
