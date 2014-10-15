@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath*:spring/spring-api-embedded-elasticsearch-test-context.xml"/>
+
+    <bean id="embeddedTomcat" class="org.apache.catalina.startup.Tomcat" depends-on="configPathInitializer" destroy-method="stop">
+        <property name="port" value="9090"/>
+    </bean>
+
+    <bean id="tomcatEventstechAppContext" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="embeddedTomcat"/>
+        <property name="targetMethod" value="addWebapp"/>
+        <property name="arguments">
+            <list>
+                <value>eventstech</value>
+                <value>#{new java.io.File("src/main/webapp").getAbsolutePath()}</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="enableJndi" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="embeddedTomcat"/>
+        <property name="targetMethod" value="enableNaming"/>
+    </bean>
+
+    <bean id="initTomcatContextXml" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="tomcatEventstechAppContext"/>
+        <property name="targetMethod" value="setConfigFile"/>
+        <property name="arguments">
+            <list>
+                <value>#{new java.io.File("../conf/dev/tomcat/context.xml").toURI().toURL()}</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="configPathInitializer" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="java.lang.System"/>
+        <property name="targetMethod" value="setProperty"/>
+        <property name="arguments">
+            <list>
+                <value>CONFIG_PATH</value>
+                <value>#{new java.io.File("../conf/dev/properties").getAbsolutePath()}</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="startTomcat" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"
+            depends-on="configPathInitializer, tomcatEventstechAppContext, enableJndi, initTomcatContextXml, elasticsearch">
+        <property name="targetObject" ref="embeddedTomcat"/>
+        <property name="targetMethod" value="start"/>
+    </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+</beans>

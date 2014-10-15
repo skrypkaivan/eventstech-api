@@ -1,10 +1,18 @@
 apply plugin: 'war'
 
 dependencies {
+    testCompile group: "org.apache.tomcat.embed", name: "tomcat-embed-core", version: "${embeddedTomcatVersion}"
+    testCompile group: "org.apache.tomcat.embed", name: "tomcat-embed-logging-juli", version: "${embeddedTomcatVersion}"
+    testCompile group: "org.apache.tomcat.embed", name: "tomcat-embed-jasper", version: "${embeddedTomcatVersion}"
+    testCompile group: "org.apache.tomcat.embed", name: "tomcat-embed-el", version: "${embeddedTomcatVersion}"
+    testCompile group: 'org.apache.tomcat', name:'tomcat-dbcp', version: "${embeddedTomcatVersion}"
+    testCompile group: 'org.springframework', name: 'spring-test', version: "${springFrameworkVersion}"
+    testCompile group: 'com.jayway.restassured', name:'rest-assured', version:"${restAssuredVersion}"
+
     compile group: 'org.springframework.security', name: 'spring-security-config', version: "${springSecurityVersion}"
     compile group: 'org.springframework.security', name: 'spring-security-web', version: "${springSecurityVersion}"
     compile group: 'org.springframework.security', name: 'spring-security-core', version: "${springSecurityVersion}"
-    provided group: 'javax.servlet',name:'servlet-api', version:"${javaxServletVersion}"
+    provided group: 'javax.servlet',name:'javax.servlet-api', version:"${javaxServletVersion}"
     compile group: 'com.mangofactory', name:'swagger-springmvc', version: "${swaggerSpringMvcVersion}"
     compile group: 'org.springframework', name: 'spring-webmvc', version: "${springFrameworkVersion}"
     compile group: 'ch.qos.logback', name:'logback-core', version: "${logbackVersion}"

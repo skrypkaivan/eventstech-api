@@ -13,7 +13,15 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: "${mysqlDriverVersion}"
     testCompile group: 'junit', name:'junit', version: "${junitVersion}"
     testCompile group: 'org.springframework', name: 'spring-test', version: "${springFrameworkVersion}"
-    testCompile group: 'org.springframework', name: 'spring-tx', version: "${springFrameworkVersion}"
+    compile group: 'org.springframework.data', name:'spring-data-elasticsearch', version:"${springDataElasticsearchVersion}"
+    testCompile group: 'com.h2database', name: 'h2', version: "${h2Version}"
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: "${sprintFrameworkDataVersion}"
+    compile group: 'org.springframework', name: 'spring-tx', version: "${springFrameworkVersion}"
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: "${hibernateEntityManagerVersion}"
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: "${hibernateJpaVersion}"
+    compile group: 'org.springframework', name: 'spring-context', version: "${springFrameworkVersion}"
+    compile group: 'org.springframework', name: 'spring-orm', version: "${springFrameworkVersion}"
+    compile group: 'org.springframework', name: 'spring-jdbc', version: "${springFrameworkVersion}"
 }
 
 configurations {

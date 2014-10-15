@@ -7,7 +7,7 @@ idea {
 }
 
 dependencies {
-    provided group: 'javax.servlet',name:'servlet-api', version:"${javaxServletVersion}"
+    provided group: 'javax.servlet',name:'javax.servlet-api', version:"${javaxServletVersion}"
     compile project (path: ':common:common-model')
     compile project (path: ':common:common-services')
 }
