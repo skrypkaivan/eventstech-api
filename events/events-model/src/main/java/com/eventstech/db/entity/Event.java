@@ -24,7 +24,7 @@ import java.util.Set;
         @NamedQuery(name = "Event.getBySlug", query = "select e from Event e where e.slug = ?1"),
         @NamedQuery(name = "Event.getUncategorisedEvents", query = "select e from Event e where e.categories is empty")
 })
-public class Event {
+public class Event extends AbstractEntity {
     public static final String TABLE_NAME = "event";
 
     @Id
@@ -93,4 +93,9 @@ public class Event {
 
     @ManyToOne(optional = false)
     @Getter @Setter private User creator;
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
 }

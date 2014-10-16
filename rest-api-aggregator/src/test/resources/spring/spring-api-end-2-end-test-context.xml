@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:property-placeholder location="classpath*:conf/db.properties, classpath*:conf/elasticsearch.properties, classpath:conf/embedded-app.properties"/>
+
+    <import resource="classpath*:spring/spring-db-context.xml"/>
+    <import resource="classpath*:spring/spring-search-context.xml"/>
+    <import resource="classpath*:spring/spring-api-embedded-test-context.xml"/>
+
+    <util:map id="entitiesToDeleteBeforeEachTest" map-class="java.util.LinkedHashMap" key-type="java.lang.Class" value-type="org.springframework.data.jpa.repository.JpaRepository">
+        <entry key="com.eventstech.db.entity.Event" value-ref="eventRepository"/>
+        <entry key="com.eventstech.db.entity.Speaker" value-ref="speakerRepository"/>
+        <entry key="com.eventstech.db.entity.EventCategory" value-ref="eventCategoryRepository"/>
+        <entry key="com.eventstech.db.entity.SpeakerCategory" value-ref="speakerCategoryRepository"/>
+        <entry key="com.eventstech.db.entity.User" value-ref="userRepository"/>
+        <entry key="com.eventstech.db.entity.UserRole" value-ref="userRoleRepository"/>
+    </util:map>
+
+    <util:map id="documentsToDeleteBeforeEachTest" map-class="java.util.LinkedHashMap" key-type="java.lang.Class" value-type="org.springframework.data.elasticsearch.repository.ElasticsearchRepository">
+        <entry key="com.eventstech.db.entity.Event" value-ref="eventSearchRepository"/>
+        <entry key="com.eventstech.db.entity.Speaker" value-ref="speakerSearchRepository"/>
+        <entry key="com.eventstech.db.entity.EventCategory" value-ref="eventCategorySearchRepository"/>
+        <entry key="com.eventstech.db.entity.SpeakerCategory" value-ref="speakerCategorySearchRepository"/>
+    </util:map>
+
+    <util:map id="entityToDocumentConversionMap" value-type="java.lang.Class" key-type="java.lang.Class">
+        <entry key="com.eventstech.db.entity.Event" value="com.eventstech.search.entity.EventDocument"/>
+        <entry key="com.eventstech.db.entity.Speaker" value="com.eventstech.search.entity.SpeakerDocument"/>
+        <entry key="com.eventstech.db.entity.EventCategory" value="com.eventstech.search.entity.EventCategoryDocument"/>
+        <entry key="com.eventstech.db.entity.SpeakerCategory" value="com.eventstech.search.entity.SpeakerCategoryDocument"/>
+    </util:map>
+
+    <bean id="gson" class="com.google.gson.Gson"/>
+
+    <bean id="jsonParser" class="com.google.gson.JsonParser"/>
+
+    <bean id="dozer" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+        <property name="mappingFiles" value="classpath*:dozer/*mappings.xml"/>
+    </bean>
+</beans>

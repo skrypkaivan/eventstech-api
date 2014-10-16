@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = UserRole.TABLE_NAME)
-public class UserRole {
+public class UserRole extends AbstractEntity {
 
     public static final String TABLE_NAME = "user_role";
 
@@ -21,4 +21,9 @@ public class UserRole {
 
     @Column(name = "name", nullable = false)
     @Getter @Setter private String name;
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
 }

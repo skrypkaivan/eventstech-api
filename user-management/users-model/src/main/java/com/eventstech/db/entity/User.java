@@ -17,7 +17,7 @@ import java.util.Set;
 @NamedQueries(value = {
         @NamedQuery(name = "User.findActiveByEmailAndPassword", query = "select u from User u where u.enabled is true and u.nonLocked is true and u.email=?1 and u.password=?2")
 })
-public class User {
+public class User extends AbstractEntity {
 
     public static final String TABLE_NAME = "user";
 
@@ -53,4 +53,9 @@ public class User {
             }
     )
     @Getter @Setter private Set<UserRole> roles;
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
 }

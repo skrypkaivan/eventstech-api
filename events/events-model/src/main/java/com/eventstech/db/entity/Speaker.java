@@ -20,7 +20,7 @@ import java.util.Set;
         @NamedQuery(name = "Speaker.getByTagSlug", query = "select s from Speaker s join s.categories c where c.slug = ?1"),
         @NamedQuery(name = "Speaker.getUncategorised", query = "select s from Speaker s where s.categories is empty")
 })
-public class Speaker {
+public class Speaker extends AbstractEntity {
     public static final String TABLE_NAME = "speaker";
 
     @Id
@@ -54,4 +54,9 @@ public class Speaker {
 
     @OneToOne
     @Getter @Setter private User user;
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
 }

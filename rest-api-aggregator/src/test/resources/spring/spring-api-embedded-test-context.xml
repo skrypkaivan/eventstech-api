@@ -6,7 +6,7 @@
     <import resource="classpath*:spring/spring-api-embedded-elasticsearch-test-context.xml"/>
 
     <bean id="embeddedTomcat" class="org.apache.catalina.startup.Tomcat" depends-on="configPathInitializer" destroy-method="stop">
-        <property name="port" value="9090"/>
+        <property name="port" value="${tomcat.port}"/>
     </bean>
 
     <bean id="tomcatEventstechAppContext" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -14,7 +14,7 @@
         <property name="targetMethod" value="addWebapp"/>
         <property name="arguments">
             <list>
-                <value>eventstech</value>
+                <value>${app.context.path}</value>
                 <value>#{new java.io.File("src/main/webapp").getAbsolutePath()}</value>
             </list>
         </property>
@@ -51,6 +51,4 @@
         <property name="targetObject" ref="embeddedTomcat"/>
         <property name="targetMethod" value="start"/>
     </bean>
-
-    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 </beans>

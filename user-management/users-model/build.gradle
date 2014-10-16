@@ -10,6 +10,7 @@ dependencies {
     compile group: 'org.springframework.security', name: 'spring-security-core', version: "${springSecurityVersion}"
     compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: "${hibernateJpaVersion}"
     compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
+    compile project (':common:common-model')
 }
 
 jar.archiveName = 'user-management-model-' + project.version + '.jar'

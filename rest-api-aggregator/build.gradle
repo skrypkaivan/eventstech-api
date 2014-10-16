@@ -8,6 +8,9 @@ dependencies {
     testCompile group: 'org.apache.tomcat', name:'tomcat-dbcp', version: "${embeddedTomcatVersion}"
     testCompile group: 'org.springframework', name: 'spring-test', version: "${springFrameworkVersion}"
     testCompile group: 'com.jayway.restassured', name:'rest-assured', version:"${restAssuredVersion}"
+    testCompile group: 'com.google.code.gson', name:'gson', version: "${gsonVersion}"
+    testCompile group: 'com.h2database', name: 'h2', version: "${h2Version}"
+    testCompile project(path:':common:data-source', configuration: 'tests')
 
     compile group: 'org.springframework.security', name: 'spring-security-config', version: "${springSecurityVersion}"
     compile group: 'org.springframework.security', name: 'spring-security-web', version: "${springSecurityVersion}"

@@ -28,4 +28,8 @@ public class EventCategoryDto {
     @Size(max = EventCategory.SLUG_LENGTH, message = ValidationMessage.TO_LONG)
     @NotEmpty(message = ValidationMessage.NOT_EMPTY)
     @Getter @Setter private String slug;
+
+    @Getter @Setter
+    @JsonProperty("parent_id")
+    private Long parentCategoryId;
 }

@@ -18,6 +18,7 @@ subprojects {
 
     dependencies {
         provided group: 'org.projectlombok', name:'lombok', version:"${lombockVersion}"
+        testCompile group: 'org.projectlombok', name:'lombok', version:"${lombockVersion}"
     }
 
     version = '1.0-SNAPSHOT'

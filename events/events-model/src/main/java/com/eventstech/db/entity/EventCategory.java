@@ -17,7 +17,7 @@ import javax.persistence.*;
     @NamedQuery(name = "EventCategory.findAllTopLevel", query = "select ec from EventCategory ec where ec.parentCategoryId is null"),
     @NamedQuery(name = "EventCategory.getSubCategories", query = "select ec from EventCategory ec where ec.parentCategoryId = ?1")
 })
-public class EventCategory {
+public class EventCategory extends AbstractEntity {
     public static final String TABLE_NAME = "event_category";
 
     public static final int NAME_LENGTH = 100;
@@ -36,4 +36,9 @@ public class EventCategory {
     @Column(name = "parent_id")
     @Getter @Setter
     private Long parentCategoryId;
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
 }

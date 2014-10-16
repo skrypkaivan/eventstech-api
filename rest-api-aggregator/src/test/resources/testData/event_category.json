@@ -1,0 +1,18 @@
+[
+    {
+        "id":1,
+        "name":"TOP_LEVEL_ONE",
+        "slug":"top_level_one"
+    },
+    {
+        "id":2,
+        "name":"TOP_LEVEL_TWO",
+        "slug":"top_level_two"
+    },
+    {
+        "id":3,
+        "name":"SECOND_LEVEL_ONE",
+        "slug":"second_level_one",
+        "parentCategoryId":1
+    }
+]
