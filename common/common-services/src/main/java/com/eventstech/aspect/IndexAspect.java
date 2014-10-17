@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
  * Author: Ivan Skrypka
  * Copyright © 2014 Eventstech.com.ua.
  */
+@SuppressWarnings("unchecked")
 @Aspect
 @Slf4j
 public class IndexAspect implements ApplicationContextAware {

@@ -40,4 +40,6 @@ subprojects {
     jar {
         manifest.attributes provider: 'eventstech.com.ua'
     }
+
+    [ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
 }
