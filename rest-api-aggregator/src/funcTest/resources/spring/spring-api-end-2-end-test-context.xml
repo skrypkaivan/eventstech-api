@@ -9,9 +9,9 @@
 
     <context:property-placeholder location="classpath*:conf/db.properties, classpath*:conf/elasticsearch.properties, classpath:conf/embedded-app.properties"/>
 
+    <import resource="classpath*:spring/spring-api-embedded-test-context.xml"/>
     <import resource="classpath*:spring/spring-db-context.xml"/>
     <import resource="classpath*:spring/spring-search-context.xml"/>
-    <import resource="classpath*:spring/spring-api-embedded-test-context.xml"/>
 
     <util:map id="entitiesToDeleteBeforeEachTest" map-class="java.util.LinkedHashMap" key-type="java.lang.Class" value-type="org.springframework.data.jpa.repository.JpaRepository">
         <entry key="com.eventstech.db.entity.Event" value-ref="eventRepository"/>
