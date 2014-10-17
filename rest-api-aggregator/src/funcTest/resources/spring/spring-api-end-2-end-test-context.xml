@@ -40,7 +40,9 @@
 
     <bean id="jsonParser" class="com.google.gson.JsonParser"/>
 
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
     <bean id="dozer" class="org.dozer.spring.DozerBeanMapperFactoryBean">
-        <property name="mappingFiles" value="classpath*:dozer/*mappings.xml"/>
+        <property name="mappingFiles" value="classpath*:dozer/dozer-user-management-mappings.xml"/>
     </bean>
 </beans>

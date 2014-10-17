@@ -58,5 +58,20 @@
                 "name":"ROLE_MANAGER"
             }
         ]
+    },
+    {
+        "id":5,
+        "email":"role_user@itut.com",
+        "firstName":"Role",
+        "lastName":"User",
+        "nonLocked":true,
+        "enabled":true,
+        "password":"1113756fd785475586e8145697988d668d2cfe9c910bdcffbaa6038d33cf50e0",
+        "roles":[
+            {
+                "id":3,
+                "name":"ROLE_USER"
+            }
+        ]
     }
 ]

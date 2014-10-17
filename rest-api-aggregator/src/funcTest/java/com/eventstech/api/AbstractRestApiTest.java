@@ -1,7 +1,7 @@
 package com.eventstech.api;
 
 import com.eventstech.test.JsonEntitiesTestExecutionListener;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.parsing.Parser;
 import org.junit.Before;
@@ -14,6 +14,8 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import static com.jayway.restassured.RestAssured.given;
+
 /**
  * Author: Ivan Skrypka
  * Copyright © 2014 Eventstech.com.ua.
@@ -24,6 +26,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 @TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class, JsonEntitiesTestExecutionListener.class})
 public abstract class AbstractRestApiTest {
 
+    public static final String X_AUTH_LOGIN_HEADER = "X-Auth-Login";
+    public static final String X_AUTH_TOKEN_HEADER = "X-Auth-Token";
     public static final String APP_HOST = "http://localhost";
 
     @Value("${app.context.path}")
@@ -36,7 +40,16 @@ public abstract class AbstractRestApiTest {
     private int appPort;
 
     @Autowired
-    protected Gson gson;
+    protected ObjectMapper objectMapper;
+
+    public final AuthCredentials login(String login, String password) {
+        return given().
+                      formParam("login", login).
+                      formParam("password", password).
+               when().
+                      post("/login").
+                      as(AuthCredentials.class);
+    }
 
     @Before
     public void initRestAssured() {

@@ -10,10 +10,23 @@ subprojects {
 
     configurations {
         provided
+        functionalTestCompile.extendsFrom testCompile
+        functionalTestRuntime.extendsFrom testRuntime
     }
 
     sourceSets {
         main { compileClasspath += configurations.provided }
+        functionalTest {
+            java.srcDir file('src/funcTest/java')
+            resources.srcDir file('src/funcTest/resources')
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+        }
+    }
+
+    task functionalTest(type: Test) {
+        testClassesDir = sourceSets.functionalTest.output.classesDir
+        classpath = sourceSets.functionalTest.runtimeClasspath
     }
 
     dependencies {
