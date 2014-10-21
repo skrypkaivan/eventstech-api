@@ -24,6 +24,6 @@
               username="" password="" driverClassName="org.h2.Driver"
               url="jdbc:h2:mem:eventstech;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE;MVCC=true"/>
 
-    <Parameter name="eventstechConfig" value="/home/vanish/projects/eventstech-api/conf/dev/properties" override="false"/>
+    <Parameter name="eventstechConfig" value="${CONFIG_PATH}" override="false"/>
 </Context>
 

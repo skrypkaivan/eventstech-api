@@ -41,5 +41,5 @@ subprojects {
         manifest.attributes provider: 'eventstech.com.ua'
     }
 
-    [ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
+    [ compileJava, compileTestJava, compileFunctionalTestJava ]*.options*.encoding = 'UTF-8'
 }
